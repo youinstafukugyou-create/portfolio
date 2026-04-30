@@ -99,11 +99,27 @@
     /* ===== HERO ===== */
     #hero {
       min-height: 100vh;
-      padding: calc(var(--nav-h) + clamp(60px, 12vw, 120px)) var(--pad-x) clamp(60px,10vw,100px);
-      display: flex; flex-direction: column; justify-content: center;
+      padding: calc(var(--nav-h) + clamp(40px, 8vw, 80px)) var(--pad-x) clamp(40px,8vw,80px);
+      display: flex; flex-direction: row; align-items: center; gap: 56px;
       border-bottom: 1px solid var(--border);
       max-width: var(--max-w); margin: 0 auto;
     }
+    .hero-content { flex: 0 0 52%; }
+    .hero-visual { flex: 1; display: flex; justify-content: center; align-items: center; }
+    .hero-visual svg { width: 100%; height: auto; max-width: 500px; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-14px); }
+    }
+    @keyframes float2 {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-9px); }
+    }
+    .illus-float-a { animation: float 3.6s ease-in-out infinite; }
+    .illus-float-b { animation: float 4.4s ease-in-out infinite 0.9s; }
+    .illus-float-c { animation: float2 3.9s ease-in-out infinite 1.6s; }
+    .illus-float-d { animation: float2 5s ease-in-out infinite 0.4s; }
     .hero-label {
       font-size: .72rem; font-weight: 600;
       letter-spacing: .2em; text-transform: uppercase;
@@ -359,6 +375,9 @@
       .cards-grid { grid-template-columns: repeat(2, 1fr); }
       .card:nth-child(3n) { border-right: 1px solid var(--border); }
       .card:nth-child(2n) { border-right: none; }
+      #hero { flex-direction: column; gap: 32px; padding-top: calc(var(--nav-h) + 48px); }
+      .hero-content { flex: none; width: 100%; }
+      .hero-visual { width: 100%; max-width: 340px; margin: 0 auto; }
     }
     @media (max-width: 600px) {
       .cards-grid { grid-template-columns: 1fr; }
@@ -366,6 +385,7 @@
       .contact-banner { flex-direction: column; align-items: flex-start; }
       .stat-num { font-size: 2.2rem; }
       .hero-title { font-size: clamp(2rem, 10vw, 3rem); }
+      .hero-visual { max-width: 260px; }
     }
   </style>
 </head>
@@ -392,26 +412,150 @@
   <!-- ===== HERO ===== -->
   <section id="top">
     <div id="hero">
-      <p class="hero-label reveal">Claude Code &times; AI Development</p>
-      <h1 class="hero-title reveal reveal-d1">
-        AI で、<br>
-        <span class="muted">アイデアを形に。</span>
-      </h1>
-      <p class="hero-sub reveal reveal-d2">
-        Claude Code を使ったエージェント開発・自動化・ゲーム制作など、<br>
-        AI を活用した開発実績をまとめています。
-      </p>
-      <div class="hero-actions reveal reveal-d3">
-        <a href="#works" class="btn btn-primary">
-          実績を見る
-          <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9,3 14,8 9,13"/></svg>
-        </a>
-        <a href="#contact" class="btn btn-outline">お問い合わせ</a>
+
+      <!-- Left: Text content -->
+      <div class="hero-content">
+        <p class="hero-label reveal">Claude Code &times; AI Development</p>
+        <h1 class="hero-title reveal reveal-d1">
+          AI で、<br>
+          <span class="muted">アイデアを形に。</span>
+        </h1>
+        <p class="hero-sub reveal reveal-d2">
+          Claude Code を使ったエージェント開発・自動化・ゲーム制作など、<br>
+          AI を活用した開発実績をまとめています。
+        </p>
+        <div class="hero-actions reveal reveal-d3">
+          <a href="#works" class="btn btn-primary">
+            実績を見る
+            <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9,3 14,8 9,13"/></svg>
+          </a>
+          <a href="#contact" class="btn btn-outline">お問い合わせ</a>
+        </div>
+        <div class="scroll-hint reveal reveal-d4">
+          <span class="scroll-line"></span>
+          Scroll
+        </div>
       </div>
-      <div class="scroll-hint reveal reveal-d4">
-        <span class="scroll-line"></span>
-        Scroll
+
+      <!-- Right: Kawaii illustration -->
+      <div class="hero-visual reveal reveal-d2">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 520" fill="none" aria-hidden="true">
+          <!-- Soft background blobs -->
+          <circle cx="420" cy="100" r="145" fill="#FFB3C6" opacity="0.15"/>
+          <circle cx="155" cy="365" r="125" fill="#B3D4FF" opacity="0.16"/>
+          <circle cx="465" cy="400" r="105" fill="#FFE5A0" opacity="0.18"/>
+          <!-- Orbit ring -->
+          <circle cx="280" cy="265" r="175" stroke="#E5E7EB" stroke-width="1.5" stroke-dasharray="5,5"/>
+
+          <!-- === CAMERA (top-right, floating) === -->
+          <g class="illus-float-a">
+            <g transform="translate(388,48)">
+              <rect x="0" y="14" width="90" height="66" rx="13" fill="#FFE5A0" stroke="#1A1A1A" stroke-width="2"/>
+              <rect x="13" y="0" width="26" height="20" rx="7" fill="#FFE5A0" stroke="#1A1A1A" stroke-width="2"/>
+              <circle cx="45" cy="47" r="25" fill="#EEF5FF" stroke="#1A1A1A" stroke-width="2"/>
+              <circle cx="45" cy="47" r="16" fill="white" stroke="#1A1A1A" stroke-width="1.5"/>
+              <circle cx="45" cy="47" r="7" fill="#B3D4FF" stroke="#1A1A1A" stroke-width="1"/>
+              <circle cx="45" cy="47" r="2.5" fill="#1A1A1A"/>
+              <circle cx="38" cy="40" r="2" fill="white" opacity="0.7"/>
+              <rect x="70" y="20" width="14" height="10" rx="3" fill="#B5E8B5" stroke="#1A1A1A" stroke-width="1.5"/>
+            </g>
+          </g>
+
+          <!-- === PENCIL (top-left, floating) === -->
+          <g class="illus-float-b">
+            <g transform="translate(58,58) rotate(-22, 12, 68)">
+              <rect x="0" y="0" width="24" height="14" rx="5" fill="#FFB3C6" stroke="#1A1A1A" stroke-width="2"/>
+              <rect x="0" y="12" width="24" height="96" fill="#FFE5A0" stroke="#1A1A1A" stroke-width="2"/>
+              <polygon points="0,106 24,106 12,130" fill="#F5CBA7" stroke="#1A1A1A" stroke-width="2" stroke-linejoin="round"/>
+              <polygon points="6,123 18,123 12,134" fill="#2C2C2C"/>
+              <line x1="0" y1="36" x2="24" y2="36" stroke="#1A1A1A" stroke-width="1" opacity="0.2"/>
+              <line x1="0" y1="62" x2="24" y2="62" stroke="#1A1A1A" stroke-width="1" opacity="0.2"/>
+              <line x1="0" y1="88" x2="24" y2="88" stroke="#1A1A1A" stroke-width="1" opacity="0.2"/>
+            </g>
+          </g>
+
+          <!-- === LAPTOP (center) === -->
+          <g transform="translate(98,195)">
+            <!-- Screen lid -->
+            <rect x="0" y="0" width="364" height="222" rx="14" fill="#F7F7F7" stroke="#1A1A1A" stroke-width="2.5"/>
+            <rect x="10" y="10" width="344" height="202" rx="8" fill="#1E1E1E"/>
+            <rect x="20" y="20" width="324" height="182" rx="5" fill="#EEF5FF"/>
+            <!-- Left eye -->
+            <ellipse cx="140" cy="106" rx="29" ry="29" fill="white" stroke="#1A1A1A" stroke-width="2"/>
+            <circle cx="146" cy="111" r="14" fill="#1A1A1A"/>
+            <circle cx="140" cy="104" r="5" fill="white"/>
+            <!-- Right eye -->
+            <ellipse cx="224" cy="106" rx="29" ry="29" fill="white" stroke="#1A1A1A" stroke-width="2"/>
+            <circle cx="230" cy="111" r="14" fill="#1A1A1A"/>
+            <circle cx="224" cy="104" r="5" fill="white"/>
+            <!-- Smile -->
+            <path d="M 154 155 Q 182 178 210 155" stroke="#1A1A1A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <!-- Blush cheeks -->
+            <ellipse cx="112" cy="136" rx="22" ry="13" fill="#FFB3C6" opacity="0.55"/>
+            <ellipse cx="252" cy="136" rx="22" ry="13" fill="#FFB3C6" opacity="0.55"/>
+            <!-- Keyboard base -->
+            <rect x="0" y="228" width="364" height="38" rx="8" fill="#EBEBEB" stroke="#1A1A1A" stroke-width="2.5"/>
+            <rect x="15" y="235" width="334" height="7" rx="3" fill="#D5D5D5"/>
+            <rect x="15" y="247" width="334" height="7" rx="3" fill="#D5D5D5"/>
+            <rect x="142" y="233" width="80" height="22" rx="5" fill="#D8D8D8" stroke="#B8B8B8" stroke-width="1"/>
+          </g>
+
+          <!-- === CODE ICON (bottom-right, floating) === -->
+          <g class="illus-float-c">
+            <g transform="translate(488,368)">
+              <rect x="0" y="0" width="65" height="54" rx="11" fill="#B3D4FF" stroke="#1A1A1A" stroke-width="2"/>
+              <text x="8" y="23" font-family="monospace" font-size="14" fill="#1A1A1A" font-weight="bold">&lt;/&gt;</text>
+              <rect x="8" y="29" width="28" height="3" rx="1.5" fill="#1A1A1A" opacity="0.35"/>
+              <rect x="8" y="36" width="46" height="3" rx="1.5" fill="#1A1A1A" opacity="0.35"/>
+              <rect x="8" y="43" width="36" height="3" rx="1.5" fill="#1A1A1A" opacity="0.35"/>
+            </g>
+          </g>
+
+          <!-- === HEART (bottom-left, floating) === -->
+          <g class="illus-float-d">
+            <g transform="translate(60,432)">
+              <path d="M22 10 C22 4.5,15 1,12 7.5 C9 1,2 4.5,2 10 C2 16,12 24,12 24 C12 24,22 16,22 10Z" fill="#FFB3C6" stroke="#1A1A1A" stroke-width="2"/>
+            </g>
+          </g>
+
+          <!-- === SPARKLES === -->
+          <g transform="translate(84,165)">
+            <line x1="0" y1="-15" x2="0" y2="15" stroke="#D4B3FF" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="-15" y1="0" x2="15" y2="0" stroke="#D4B3FF" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="-10" y1="-10" x2="10" y2="10" stroke="#D4B3FF" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="10" y1="-10" x2="-10" y2="10" stroke="#D4B3FF" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+          <g transform="translate(530,204)">
+            <line x1="0" y1="-12" x2="0" y2="12" stroke="#FFB3C6" stroke-width="2" stroke-linecap="round"/>
+            <line x1="-12" y1="0" x2="12" y2="0" stroke="#FFB3C6" stroke-width="2" stroke-linecap="round"/>
+            <line x1="-8" y1="-8" x2="8" y2="8" stroke="#FFB3C6" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="8" y1="-8" x2="-8" y2="8" stroke="#FFB3C6" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+          <g transform="translate(310,470)">
+            <line x1="0" y1="-9" x2="0" y2="9" stroke="#B5E8B5" stroke-width="2" stroke-linecap="round"/>
+            <line x1="-9" y1="0" x2="9" y2="0" stroke="#B5E8B5" stroke-width="2" stroke-linecap="round"/>
+          </g>
+
+          <!-- === 5-POINTED STAR (top-right) === -->
+          <path d="M512 44 L518 62 L537 62 L522 73 L528 91 L512 80 L496 91 L502 73 L487 62 L506 62 Z" fill="#FFE5A0" stroke="#1A1A1A" stroke-width="1.5" stroke-linejoin="round"/>
+
+          <!-- === 4-POINTED STAR (bottom) === -->
+          <path d="M458 474 L461 463 L472 460 L461 457 L458 446 L455 457 L444 460 L455 463 Z" fill="#B5E8B5" stroke="#1A1A1A" stroke-width="1.5"/>
+
+          <!-- === ACCENT DOTS === -->
+          <circle cx="312" cy="46" r="5.5" fill="#B5E8B5" stroke="#1A1A1A" stroke-width="1.5"/>
+          <circle cx="548" cy="312" r="6" fill="#FFE5A0" stroke="#1A1A1A" stroke-width="1.5"/>
+          <circle cx="40" cy="300" r="4.5" fill="#FFB3C6" stroke="#1A1A1A" stroke-width="1.5"/>
+          <circle cx="494" cy="152" r="5" fill="#D4B3FF" stroke="#1A1A1A" stroke-width="1.5"/>
+          <circle cx="376" cy="490" r="4" fill="#B3D4FF" stroke="#1A1A1A" stroke-width="1.5"/>
+          <circle cx="168" cy="488" r="3.5" fill="#FFE5A0" stroke="#1A1A1A" stroke-width="1.5"/>
+
+          <!-- === DASHED RINGS === -->
+          <circle cx="108" cy="198" r="22" fill="none" stroke="#B3D4FF" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <circle cx="498" cy="342" r="16" fill="none" stroke="#FFB3C6" stroke-width="1.5" stroke-dasharray="3,2"/>
+        </svg>
       </div>
+
     </div>
   </section>
 
