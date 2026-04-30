@@ -1,0 +1,64 @@
+design_system_prompt:
+  concept:
+    base_style: "Modern Minimalist"
+    atmosphere: 
+      - "Clean"
+      - "Professional"
+      - "Content-first"
+      - "Sleek"
+      - "Neutral"
+    core_philosophy: "UI自体の装飾を極限まで削ぎ落とし、配置されるコンテンツ（画像やテキスト）を主役とするノイズレスな空間設計。"
+
+  variables:
+    # 別のサイトに流用する際はこの変数を変更するだけで雰囲気を変えられる
+    brand_accent_color: "#000000" # デフォルトは黒。流用先のブランドカラー（青や赤など）に差し替え可能
+    ui_radius: "4px" # 丸みの強度。0pxならシャープで厳格、8px〜なら柔らかい印象に変化
+
+  colors:
+    background:
+      primary: "#FFFFFF" # メイン背景（白）
+      secondary: "#F8F9FA" # セクション区切りやホバー時のごく薄い背景
+    text:
+      primary: "#1A1A1A" # 完全な黒を避けた高可読性のダークグレー
+      secondary: "#6B7280" # メタデータ、補足説明、タグなどのサブテキスト
+    ui:
+      border: "#E5E7EB" # 要素を区切るための主張しないライン
+      accent: "${variables.brand_accent_color}"
+
+  typography:
+    family: "モダンでクリーンなサンセリフ体（Inter, Roboto, Noto Sans JPなど）"
+    hierarchy:
+      heading:
+        weight: "Bold"
+        characteristics: "余白を広く取り、力強くもすっきりとした印象を与える"
+      body:
+        weight: "Regular"
+        line_height: "1.6 ~ 1.8"
+        characteristics: "長文でも読み疲れしない可読性重視の設計"
+      metadata:
+        weight: "Medium"
+        size: "Small"
+        characteristics: "カテゴリや日付など、情報階層を下げるためのスタイル"
+
+  components:
+    cards:
+      style: "フラットデザイン"
+      border_radius: "${variables.ui_radius}"
+      interaction: "ホバー時に画像が微細に拡大（Scale）、またはごく薄いシャドウが追加される控えめなエフェクト"
+    buttons_and_tags:
+      style: "ソリッド（塗りつぶし）またはアウトライン"
+      border_radius: "ピルシェイプ（完全な角丸）または ${variables.ui_radius}"
+      colors: "通常時はモノトーン、ホバー時やアクティブ時に ${variables.brand_accent_color} を適用"
+    navigation:
+      style: "固定ヘッダー、または最小限の要素のみを配置したクリーンなナビゲーション"
+      background: "スクロール時に背景ブラー（Glassmorphism）を薄く適用し、背面コンテンツとの干渉を防ぐ"
+
+  layout_rules:
+    spacing: "マージンとパディングを通常より広く（1.5倍程度）取り、要素間の独立性と余白の美しさを確保する"
+    grid: "整然としたカラムレイアウトを使用し、視線の動きを一定に保つ"
+    alignment: "原則として左揃え、または中央揃えで統一し、情報の構造を視覚的に整理する"
+
+  generation_guidelines:
+    - "具体的な文言や特定のレイアウト構造（例: 3カラムの固定配置など）には依存しないこと。"
+    - "この設定を使用してUIを生成・構築する際は、装飾的な背景パターンや過剰なグラデーションを排除すること。"
+    - "流用先の目的に応じて `variables` の値を調整し、全体のトーン＆マナーを制御すること。"

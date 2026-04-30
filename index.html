@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Developer Portfolio — Yuichiro Washizaki</title>
+  <meta name="description" content="Claude Code を使ったAIエージェント開発・自動化・ゲーム制作の実績をまとめたポートフォリオ。">
+  <meta property="og:title" content="AI Developer Portfolio">
+  <meta property="og:description" content="Claude Code × AI Development の開発実績">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    :root {
+      --accent:      #000000;
+      --accent-inv:  #ffffff;
+      --radius:      4px;
+      --bg:          #ffffff;
+      --bg-sub:      #f8f9fa;
+      --text:        #1a1a1a;
+      --muted:       #6b7280;
+      --border:      #e5e7eb;
+      --nav-h:       60px;
+      --max-w:       1200px;
+      --pad-x:       clamp(24px, 5vw, 64px);
+      --section-py:  clamp(64px, 10vw, 112px);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--pad-x);
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: 0 1px 12px rgba(0,0,0,.06); }
+
+    .nav-logo {
+      font-size: .88rem; font-weight: 700;
+      letter-spacing: .08em; color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: .8rem; font-weight: 500;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* hamburger */
+    .nav-toggle {
+      display: none; flex-direction: column;
+      gap: 5px; cursor: pointer; padding: 4px;
+      background: none; border: none;
+    }
+    .nav-toggle span {
+      display: block; width: 22px; height: 1.5px;
+      background: var(--text); transition: all .3s;
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* mobile menu */
+    .nav-mobile {
+      display: none; position: fixed;
+      top: var(--nav-h); left: 0; right: 0;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+      padding: 24px var(--pad-x); z-index: 199;
+      flex-direction: column; gap: 24px;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      font-size: 1rem; font-weight: 500;
+      color: var(--text); text-decoration: none;
+      letter-spacing: .06em;
+    }
+
+    /* ===== HERO ===== */
+    #hero {
+      min-height: 100vh;
+      padding: calc(var(--nav-h) + clamp(60px, 12vw, 120px)) var(--pad-x) clamp(60px,10vw,100px);
+      display: flex; flex-direction: column; justify-content: center;
+      border-bottom: 1px solid var(--border);
+      max-width: var(--max-w); margin: 0 auto;
+    }
+    .hero-label {
+      font-size: .72rem; font-weight: 600;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 24px;
+    }
+    .hero-title {
+      font-size: clamp(2.6rem, 7vw, 5.2rem);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -.03em; color: var(--text);
+    }
+    .hero-title .muted { color: var(--muted); font-weight: 300; }
+    .hero-sub {
+      margin-top: 28px;
+      font-size: clamp(.88rem, 1.5vw, 1rem);
+      color: var(--muted); max-width: 500px; line-height: 1.8;
+    }
+    .hero-actions {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-top: 48px;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px; border-radius: var(--radius);
+      font-size: .82rem; font-weight: 600;
+      letter-spacing: .06em; text-transform: uppercase;
+      text-decoration: none; cursor: pointer;
+      border: 1px solid transparent;
+      transition: opacity .2s, background .2s, color .2s, border-color .2s;
+    }
+    .btn-primary { background: var(--accent); color: var(--accent-inv); }
+    .btn-primary:hover { opacity: .75; }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border-color: var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* hero scroll hint */
+    .scroll-hint {
+      margin-top: 80px;
+      display: flex; align-items: center; gap: 12px;
+      color: var(--muted); font-size: .72rem;
+      letter-spacing: .12em; text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 40px; height: 1px; background: var(--border);
+    }
+
+    /* ===== SECTION WRAPPER ===== */
+    .section-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: var(--section-py) var(--pad-x);
+    }
+    .section-meta {
+      font-size: .72rem; font-weight: 600;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700; letter-spacing: -.03em; line-height: 1.1;
+    }
+    .section-divider {
+      width: 100%; height: 1px;
+      background: var(--border); margin: 40px 0;
+    }
+
+    /* ===== ABOUT ===== */
+    #about { border-top: 1px solid var(--border); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+    .about-lead {
+      font-size: 1.05rem; font-weight: 500; line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .about-body {
+      font-size: .9rem; color: var(--muted); line-height: 1.8;
+    }
+    .about-body + .about-body { margin-top: 12px; }
+    .skill-list {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-top: 32px;
+    }
+    .skill-tag {
+      font-size: .75rem; font-weight: 500;
+      padding: 5px 14px; border-radius: 99px;
+      border: 1px solid var(--border); color: var(--muted);
+      transition: border-color .2s, color .2s;
+    }
+    .skill-tag:hover { border-color: var(--text); color: var(--text); }
+
+    .stat-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--border); gap: 0;
+    }
+    .stat-cell {
+      padding: 36px 32px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stat-cell:nth-child(2n) { border-right: none; }
+    .stat-cell:nth-child(n+3) { border-bottom: none; }
+    .stat-num {
+      font-size: 2.8rem; font-weight: 700;
+      letter-spacing: -.04em; line-height: 1;
+    }
+    .stat-label {
+      font-size: .78rem; color: var(--muted);
+      margin-top: 8px; letter-spacing: .04em;
+    }
+
+    /* ===== WORKS ===== */
+    #works { background: var(--bg-sub); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .filter-row {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-top: 32px;
+    }
+    .filter-btn {
+      font-size: .72rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 8px 20px; border-radius: 99px;
+      background: var(--bg); color: var(--muted);
+      border: 1px solid var(--border);
+      cursor: pointer; transition: all .2s;
+    }
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--accent); color: var(--accent-inv);
+      border-color: var(--accent);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      margin-top: 40px;
+    }
+    .card {
+      background: var(--bg);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      transition: background .25s;
+    }
+    .card:nth-child(3n) { border-right: none; }
+
+    .card-thumb {
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background: var(--bg-sub);
+      position: relative;
+    }
+    .card-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform .6s cubic-bezier(.25,.46,.45,.94);
+    }
+    .card:hover .card-thumb img { transform: scale(1.06); }
+    .card:hover { background: var(--bg-sub); }
+
+    .card-body { padding: 20px 24px 28px; }
+    .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+    .card-tag {
+      font-size: .65rem; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: var(--radius);
+      border: 1px solid var(--border); color: var(--muted);
+    }
+    .card-tag.dark {
+      background: var(--accent); color: var(--accent-inv);
+      border-color: var(--accent);
+    }
+    .card-title {
+      font-size: .95rem; font-weight: 700;
+      letter-spacing: -.01em; line-height: 1.5;
+    }
+    .card-desc {
+      font-size: .8rem; color: var(--muted);
+      margin-top: 8px; line-height: 1.7;
+    }
+    .card[data-hidden="true"] { display: none; }
+
+    /* ===== CONTACT ===== */
+    #contact { border-top: 1px solid var(--border); }
+    .contact-banner {
+      background: var(--accent); color: var(--accent-inv);
+      border-radius: var(--radius);
+      padding: clamp(40px, 6vw, 72px) clamp(32px, 5vw, 64px);
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 40px;
+      margin-top: 48px; flex-wrap: wrap;
+    }
+    .contact-copy h3 {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 700; letter-spacing: -.02em;
+    }
+    .contact-copy p {
+      font-size: .88rem; color: rgba(255,255,255,.55);
+      margin-top: 8px; line-height: 1.7; max-width: 400px;
+    }
+    .contact-actions { display: flex; gap: 10px; flex-shrink: 0; flex-wrap: wrap; }
+    .btn-inv-primary {
+      background: var(--accent-inv); color: var(--accent);
+      border-color: var(--accent-inv);
+    }
+    .btn-inv-primary:hover { opacity: .88; }
+    .btn-inv-outline {
+      background: transparent; color: var(--accent-inv);
+      border: 1px solid rgba(255,255,255,.3);
+    }
+    .btn-inv-outline:hover { background: rgba(255,255,255,.12); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px var(--pad-x);
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-left, .footer-right {
+      font-size: .75rem; color: var(--muted); letter-spacing: .04em;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-d1 { transition-delay: .05s; }
+    .reveal-d2 { transition-delay: .12s; }
+    .reveal-d3 { transition-delay: .19s; }
+    .reveal-d4 { transition-delay: .26s; }
+    .reveal-d5 { transition-delay: .33s; }
+    .reveal-d6 { transition-delay: .40s; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .card:nth-child(3n) { border-right: 1px solid var(--border); }
+      .card:nth-child(2n) { border-right: none; }
+    }
+    @media (max-width: 600px) {
+      .cards-grid { grid-template-columns: 1fr; }
+      .card { border-right: none !important; }
+      .contact-banner { flex-direction: column; align-items: flex-start; }
+      .stat-num { font-size: 2.2rem; }
+      .hero-title { font-size: clamp(2rem, 10vw, 3rem); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">AI Portfolio</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="nav-mobile" id="navMobile">
+    <a href="#about" class="nav-mobile-link">About</a>
+    <a href="#works" class="nav-mobile-link">Works</a>
+    <a href="#contact" class="nav-mobile-link">Contact</a>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section id="top">
+    <div id="hero">
+      <p class="hero-label reveal">Claude Code &times; AI Development</p>
+      <h1 class="hero-title reveal reveal-d1">
+        AI で、<br>
+        <span class="muted">アイデアを形に。</span>
+      </h1>
+      <p class="hero-sub reveal reveal-d2">
+        Claude Code を使ったエージェント開発・自動化・ゲーム制作など、<br>
+        AI を活用した開発実績をまとめています。
+      </p>
+      <div class="hero-actions reveal reveal-d3">
+        <a href="#works" class="btn btn-primary">
+          実績を見る
+          <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9,3 14,8 9,13"/></svg>
+        </a>
+        <a href="#contact" class="btn btn-outline">お問い合わせ</a>
+      </div>
+      <div class="scroll-hint reveal reveal-d4">
+        <span class="scroll-line"></span>
+        Scroll
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about">
+    <div class="section-inner">
+      <p class="section-meta reveal">About</p>
+      <h2 class="section-title reveal reveal-d1">使用技術</h2>
+      <div class="section-divider"></div>
+      <div class="about-grid">
+        <div>
+          <p class="about-lead reveal">Claude Code を中心に、AI×開発の実践を積み重ねています。</p>
+          <p class="about-body reveal reveal-d1">
+            AIエージェントの設計・スキル開発・Webアプリ制作に取り組んでいます。
+            マルチエージェントによる自動化から、ゲーム開発・コンテンツ生成AIまで幅広く実装してきました。
+          </p>
+          <p class="about-body reveal reveal-d2">
+            Claude Code を活用したスキル開発を通じて、AI と人間が協働する開発スタイルを探求しています。
+          </p>
+          <div class="skill-list reveal reveal-d3">
+            <span class="skill-tag">Claude Code</span>
+            <span class="skill-tag">AI Agent</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">HTML / CSS</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">Google Sheets API</span>
+            <span class="skill-tag">Manus</span>
+            <span class="skill-tag">Threads API</span>
+          </div>
+        </div>
+        <div class="stat-grid reveal reveal-d2">
+          <div class="stat-cell">
+            <div class="stat-num">8</div>
+            <div class="stat-label">制作実績</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">3</div>
+            <div class="stat-label">AIエージェント</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">2</div>
+            <div class="stat-label">ゲーム開発</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">∞</div>
+            <div class="stat-label">学習継続中</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WORKS ===== -->
+  <section id="works">
+    <div class="section-inner">
+      <p class="section-meta reveal">Works</p>
+      <h2 class="section-title reveal reveal-d1">開発実績</h2>
+      <div class="filter-row reveal reveal-d2">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="ai-agent">AI Agent</button>
+        <button class="filter-btn" data-filter="automation">Automation</button>
+        <button class="filter-btn" data-filter="game">Game</button>
+        <button class="filter-btn" data-filter="web">Web</button>
+      </div>
+      <div class="cards-grid">
+
+        <div class="card reveal" data-category="ai-agent">
+          <div class="card-thumb">
+            <img loading="lazy" src="portforio-images/課題１.png" alt="マルチエージェント開発">
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="card-tag dark">Claude Code</span>
+              <span class="card-tag">AI Agent</span>
+            </div>
+            <h3 class="card-title">マルチエージェント開発</h3>
+            <p class="card-desc">doc-writer・code-reviewer・test-runner の 3 エージェントが連携し、自動でコードを完成させるシステム。</p>
+          </div>
+        </div>
+
+        <div class="card reveal reveal-d1" data-category="automation">
+          <div class="card-thumb">
+            <img loading="lazy" src="portforio-images/課題２.png" alt="議事録生成スキル">
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="card-tag dark">Claude Code</span>
+              <span class="card-tag">Automation</span>
+            </div>
+            <h3 class="card-title">議事録生成スキル</h3>
+            <p class="card-desc">箇条書きメモを入力するだけで、構造化された議事録を自動生成するカスタムスキル。</p>
+          </div>
+        </div>
+
+        <div class="card reveal reveal-d2" data-category="ai-agent">
+          <div class="card-thumb">
+            <img loading="lazy" src="portforio-images/課題３.png" alt="Threads投稿生成AI">
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="card-tag dark">Claude Code</span>
+              <span class="card-tag">Content AI</span>
+            </div>
+            <h3 class="card-title">Threads 投稿生成 AI</h3>
+            <p class="card-desc">40代女性向け美容ジャンルの Threads 投稿文を、リサーチから執筆まで自動生成する AI スキル。</p>
+          </div>
+        </div>
+
+        <div class="card reveal reveal-d3" data-category="automation">
+          <div class="card-thumb">
+            <img loading="lazy" src="portforio-images/News.png" alt="ニュース配信Bot">
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="card-tag dark">Manus</span>
+              <span class="card-tag">Bot</span>
+            </div>
+            <h3 class="card-title">ニュース配信 Bot</h3>
+            <p class="card-desc">Yahoo! ニュースの最新情報を定期取得・要約し、メッセージングアプリへ自動配信する Bot。</p>
+          </div>
+        </div>
+
+        <div class="card reveal reveal-d4" data-category="automation">
+          <div class="card-thumb">
+            <img loading="lazy" src="portforio-images/課題４.png" alt="スプレッドシート×AI連携">
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="card-tag">Sheets API</span>
+              <span class="card-tag">Data × AI</span>
+            </div>
+            <h3 class="card-title">スプレッドシート × AI 連携</h3>
+            <p class="card-desc">AI による Web リサーチ結果をスプレッドシートへ自動書き込みするデータ収集パイプライン。</p>
+          </div>
+        </div>
+
+        <div class="card reveal reveal-d5" data-category="web">
+          <div class="card-thumb">
+            <img loading="lazy" src="portforio-images/美容.png" alt="美容情報サイト">
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="card-tag dark">Web</span>
+            </div>
+            <h3 class="card-title">美容情報サイト</h3>
+            <p class="card-desc">皮膚科学的エビデンスをベースにした美容情報サイトのランディングページ。</p>
+          </div>
+        </div>
+
+        <div class="card reveal" data-category="game">
+          <div class="card-thumb">
+            <img loading="lazy" src="portforio-images/テトリス.png" alt="改良版テトリス">
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="card-tag dark">Game</span>
+              <span class="card-tag">JavaScript</span>
+            </div>
+            <h3 class="card-title">改良版テトリス</h3>
+            <p class="card-desc">NEXT 表示・スコア機能を実装したダークテーマのブラウザ型テトリス。</p>
+          </div>
+        </div>
+
+        <div class="card reveal reveal-d1" data-category="game">
+          <div class="card-thumb">
+            <img loading="lazy" src="portforio-images/ぷよぷよ.png" alt="ぷよぷよ">
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="card-tag dark">Game</span>
+              <span class="card-tag">JavaScript</span>
+            </div>
+            <h3 class="card-title">ぷよぷよ</h3>
+            <p class="card-desc">パーティクル背景が動くスタイリッシュなブラウザ型ぷよぷよゲーム。</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact">
+    <div class="section-inner">
+      <p class="section-meta reveal">Contact</p>
+      <h2 class="section-title reveal reveal-d1">お問い合わせ</h2>
+      <div class="contact-banner reveal reveal-d2">
+        <div class="contact-copy">
+          <h3>一緒に何か作りませんか？</h3>
+          <p>AI を活用した開発・自動化・コンテンツ生成に興味がある方はお気軽にどうぞ。</p>
+        </div>
+        <div class="contact-actions">
+          <a href="mailto:gekkouka.0114@gmail.com" class="btn btn-inv-primary">
+            メールを送る
+            <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9,3 14,8 9,13"/></svg>
+          </a>
+          <a href="https://github.com/youinstafukugyou-create" target="_blank" rel="noopener" class="btn btn-inv-outline">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p class="footer-left">© 2026 Yuichiro Washizaki</p>
+    <p class="footer-right">Built with Claude Code</p>
+  </footer>
+
+  <script>
+    // ── Nav scroll shadow ──
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    // ── Mobile nav toggle ──
+    const toggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('navMobile');
+    toggle.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      toggle.classList.toggle('open', open);
+    });
+    document.querySelectorAll('.nav-mobile-link').forEach(a => {
+      a.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        toggle.classList.remove('open');
+      });
+    });
+
+    // ── Scroll reveal ──
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ── Works filter ──
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.card');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        cards.forEach(card => {
+          const show = f === 'all' || card.dataset.category === f;
+          card.dataset.hidden = show ? 'false' : 'true';
+          // fix border after filter
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
