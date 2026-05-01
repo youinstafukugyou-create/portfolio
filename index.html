@@ -3,463 +3,135 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Developer Portfolio — Yuichiro Washizaki</title>
+  <title>gekko | AI Developer Portfolio</title>
   <meta name="description" content="Claude Code を使ったAIエージェント開発・自動化・ゲーム制作の実績をまとめたポートフォリオ。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-
-    :root {
-      --blue:       #1A3FA8;
-      --blue-mid:   #2550CC;
-      --blue-pale:  rgba(26, 63, 168, 0.07);
-      --blue-line:  rgba(26, 63, 168, 0.18);
-      --bg:         #FFFFFF;
-      --text:       #111111;
-      --muted:      #555555;
-      --border:     #DCDCDC;
-      --frame:      6px;
-      --max-w:      1360px;
-      --pad-x:      clamp(48px, 5vw, 80px);
-      --section-py: clamp(72px, 10vw, 120px);
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Noto Sans JP', 'Helvetica Neue', sans-serif;
-      line-height: 1.8;
-      -webkit-font-smoothing: antialiased;
-      border: var(--frame) solid var(--blue);
-      min-height: 100vh;
-      position: relative;
-    }
-
-    /* ===== DOT-NETWORK BACKGROUND ===== */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(circle, rgba(26,63,168,0.22) 1.5px, transparent 1.5px);
-      background-size: 52px 52px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Network lines overlay */
-    .network-bg {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.13;
-    }
-
-    /* All content above background */
-    nav, main, footer, .side-label { position: relative; z-index: 1; }
-
-    /* ===== SIDE LABELS ===== */
-    .side-label {
-      position: fixed;
-      top: 50%;
-      font-family: 'Montserrat', sans-serif;
-      font-size: .62rem;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--blue);
-      writing-mode: vertical-rl;
-      pointer-events: none;
-    }
-    .side-label-left  { left: 14px; transform: translateY(-50%) rotate(180deg); }
-    .side-label-right { right: 14px; transform: translateY(-50%); }
-
-    /* ===== NAV ===== */
-    nav {
-      position: sticky; top: 0; z-index: 200;
-      background: rgba(255,255,255,0.94);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--blue-line);
-      padding: 16px var(--pad-x);
-      display: flex; flex-direction: column; align-items: center; gap: 12px;
-    }
-    .nav-logo {
-      font-family: 'Montserrat', sans-serif;
-      font-size: .82rem; font-weight: 700;
-      letter-spacing: .22em; text-transform: uppercase;
-      color: var(--blue); text-decoration: none;
-    }
-    .nav-links {
-      display: flex; align-items: center; gap: 0; list-style: none;
-    }
-    .nav-links li { display: flex; align-items: center; }
-    .nav-links li + li::before {
-      content: '●';
-      font-size: .3rem;
-      color: var(--blue);
-      margin: 0 16px;
-      opacity: .7;
-    }
-    .nav-links a {
-      font-family: 'Montserrat', sans-serif;
-      font-size: .68rem; font-weight: 600;
-      letter-spacing: .12em; text-transform: uppercase;
-      color: var(--blue); text-decoration: none;
-      transition: opacity .2s;
-    }
-    .nav-links a:hover { opacity: .55; }
-
-    /* hamburger */
-    .nav-toggle {
-      display: none; flex-direction: column;
-      gap: 5px; cursor: pointer; padding: 4px;
-      background: none; border: none; position: absolute; right: var(--pad-x); top: 50%;
-      transform: translateY(-50%);
-    }
-    .nav-toggle span {
-      display: block; width: 22px; height: 1.5px;
-      background: var(--blue); transition: all .3s;
-    }
-    .nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .nav-toggle.open span:nth-child(2) { opacity: 0; }
-    .nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-    .nav-mobile {
-      display: none; position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(255,255,255,.98);
-      padding: 80px var(--pad-x); z-index: 199;
-      flex-direction: column; align-items: center; gap: 36px;
-    }
-    .nav-mobile.open { display: flex; }
-    .nav-mobile a {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.1rem; font-weight: 600;
-      letter-spacing: .12em; text-transform: uppercase;
-      color: var(--blue); text-decoration: none;
-    }
-
-    /* ===== SECTION ICON ===== */
-    .section-icon {
-      display: flex; flex-direction: column; align-items: center; gap: 10px;
-      margin-bottom: 56px;
-    }
-    .section-icon svg { width: 56px; height: 56px; }
-    .section-icon-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: .68rem; font-weight: 700;
-      letter-spacing: .28em; text-transform: uppercase;
-      color: var(--blue);
-    }
-    .section-icon-dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: var(--blue); margin-top: 2px;
-    }
-
-    /* ===== HERO ===== */
+    /* HOME-specific */
     #hero {
-      display: flex; align-items: center;
-      gap: 0;
-      min-height: calc(100vh - 90px);
+      display: flex; align-items: center; gap: 0;
+      min-height: calc(100vh - 88px);
       padding: clamp(48px,8vw,80px) var(--pad-x);
       border-bottom: 1px solid var(--blue-line);
-      max-width: 100%;
-      overflow: hidden;
+      max-width: 100%; overflow: hidden;
     }
-    .hero-content { flex: 0 0 52%; padding-right: clamp(32px, 5vw, 72px); }
-    .hero-visual { flex: 1; }
-
+    .hero-content { flex: 0 0 50%; padding-right: clamp(32px,5vw,72px); }
+    .hero-visual   { flex: 1; }
     .hero-eyebrow {
       font-family: 'Montserrat', sans-serif;
-      font-size: .65rem; font-weight: 600;
-      letter-spacing: .26em; text-transform: uppercase;
-      color: var(--blue); margin-bottom: 24px;
-      opacity: .8;
+      font-size: .64rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 24px; opacity: .8;
     }
     .hero-title {
       font-family: 'Montserrat', sans-serif;
       font-size: clamp(3rem, 6.5vw, 5.6rem);
-      font-weight: 700; line-height: 1.08;
-      letter-spacing: -.02em;
-      color: var(--blue);
+      font-weight: 700; line-height: 1.06; letter-spacing: -.02em; color: var(--blue);
     }
     .hero-title .thin { font-weight: 300; font-style: italic; }
     .hero-sub {
-      margin-top: 28px;
-      font-size: .9rem; color: var(--muted);
+      margin-top: 28px; font-size: .9rem; color: var(--muted);
       max-width: 440px; line-height: 1.9;
     }
     .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 48px; }
-
-    /* Blue outline button (jojodesign style) */
-    .btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 13px 32px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: .68rem; font-weight: 700;
-      letter-spacing: .14em; text-transform: uppercase;
-      text-decoration: none; cursor: pointer;
-      transition: background .22s, color .22s;
-    }
-    .btn-outline {
-      background: transparent; color: var(--blue);
-      border: 1px solid var(--blue);
-    }
-    .btn-outline:hover { background: var(--blue); color: #fff; }
-    .btn-fill { background: var(--blue); color: #fff; border: 1px solid var(--blue); }
-    .btn-fill:hover { background: var(--blue-mid); border-color: var(--blue-mid); }
-    .btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
-
-    /* Hero image */
     .hero-image-wrap {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      overflow: hidden;
-      border: 1px solid var(--blue-line);
+      width: 100%; aspect-ratio: 4/3;
+      overflow: hidden; border: 1px solid var(--blue-line);
     }
     .hero-image-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    /* ===== SECTION WRAPPER ===== */
-    .section-inner {
+    /* Vision */
+    #vision {
+      border-bottom: 1px solid var(--blue-line);
+    }
+    .vision-inner {
       max-width: var(--max-w); margin: 0 auto;
       padding: var(--section-py) var(--pad-x);
-      text-align: center;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
     }
-    .section-inner.left { text-align: left; }
-    .section-title {
+    .vision-icon { margin-bottom: 40px; }
+    .vision-heading {
       font-family: 'Montserrat', sans-serif;
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-      font-weight: 700; letter-spacing: -.02em; line-height: 1.15;
-      color: var(--blue);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700; letter-spacing: -.02em; color: var(--blue); line-height: 1.15;
     }
-    .section-divider {
-      width: 48px; height: 1px;
-      background: var(--blue); margin: 28px auto;
-    }
-    .section-inner.left .section-divider { margin-left: 0; }
-
-    /* ===== ABOUT ===== */
-    #about { border-top: 1px solid var(--blue-line); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; text-align: left; margin-top: 56px; }
-    .about-lead { font-size: 1rem; font-weight: 500; line-height: 1.85; color: var(--blue); margin-bottom: 20px; }
-    .about-body { font-size: .88rem; color: var(--muted); line-height: 1.95; }
-    .about-body + .about-body { margin-top: 14px; }
-    .skill-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 36px; }
-    .skill-tag {
-      font-family: 'Montserrat', sans-serif;
-      font-size: .62rem; font-weight: 700;
-      letter-spacing: .1em; text-transform: uppercase;
-      padding: 6px 16px;
-      border: 1px solid var(--blue);
-      color: var(--blue);
-      transition: background .2s, color .2s;
-    }
-    .skill-tag:hover { background: var(--blue); color: #fff; }
-
-    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--blue-line); }
-    .stat-cell {
-      padding: 40px 32px;
-      border-right: 1px solid var(--blue-line);
-      border-bottom: 1px solid var(--blue-line);
-      transition: background .2s;
-    }
-    .stat-cell:hover { background: var(--blue-pale); }
-    .stat-cell:nth-child(2n) { border-right: none; }
-    .stat-cell:nth-child(n+3) { border-bottom: none; }
-    .stat-num {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 3rem; font-weight: 700;
-      letter-spacing: -.04em; line-height: 1;
-      color: var(--blue);
-    }
-    .stat-label { font-size: .72rem; color: var(--muted); margin-top: 10px; letter-spacing: .06em; }
-
-    /* ===== WORKS ===== */
-    #works { border-top: 1px solid var(--blue-line); }
-    .filter-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 40px; }
-    .filter-btn {
-      font-family: 'Montserrat', sans-serif;
-      font-size: .62rem; font-weight: 700;
-      letter-spacing: .12em; text-transform: uppercase;
-      padding: 7px 20px;
-      background: transparent; color: var(--muted);
-      border: 1px solid var(--border);
-      cursor: pointer; transition: all .2s;
-    }
-    .filter-btn.active,
-    .filter-btn:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
-
-    .cards-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 0; border: 1px solid var(--blue-line); margin-top: 48px;
-    }
-    .card {
-      background: var(--bg);
-      border-right: 1px solid var(--blue-line);
-      border-bottom: 1px solid var(--blue-line);
-      overflow: hidden;
-      transition: background .2s;
-    }
-    .card:nth-child(3n) { border-right: none; }
-    .card:hover { background: var(--blue-pale); }
-    .card-thumb { overflow: hidden; aspect-ratio: 4/3; background: #f0f2f8; }
-    .card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.25,.46,.45,.94); }
-    .card:hover .card-thumb img { transform: scale(1.04); }
-    .card-body { padding: 20px 24px 28px; text-align: left; }
-    .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
-    .card-tag {
-      font-family: 'Montserrat', sans-serif;
-      font-size: .58rem; font-weight: 700;
-      letter-spacing: .1em; text-transform: uppercase;
-      padding: 3px 10px;
-      border: 1px solid var(--blue-line);
-      color: var(--blue);
-    }
-    .card-tag.fill { background: var(--blue); color: #fff; border-color: var(--blue); }
-    .card-title { font-size: .9rem; font-weight: 700; line-height: 1.5; color: var(--text); }
-    .card-desc { font-size: .78rem; color: var(--muted); margin-top: 8px; line-height: 1.85; }
-
-    /* VIEW MORE button row */
-    .view-more-row { display: flex; justify-content: center; margin-top: 56px; }
-
-    /* ===== CONTACT ===== */
-    #contact { border-top: 1px solid var(--blue-line); }
-    .contact-inner {
-      border: 1px solid var(--blue-line);
-      padding: clamp(52px,7vw,88px) clamp(40px,6vw,80px);
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 48px; flex-wrap: wrap; margin-top: 52px;
-    }
-    .contact-copy h3 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
-      font-weight: 700; color: var(--blue); letter-spacing: -.01em;
-    }
-    .contact-copy p { font-size: .88rem; color: var(--muted); margin-top: 10px; line-height: 1.85; max-width: 380px; }
-    .contact-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-
-    /* ===== FOOTER ===== */
-    footer {
-      border-top: 1px solid var(--blue-line);
-      padding: 28px var(--pad-x);
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-    }
-    .footer-logo {
-      font-family: 'Montserrat', sans-serif;
-      font-size: .68rem; font-weight: 700;
-      letter-spacing: .2em; text-transform: uppercase; color: var(--blue);
-    }
-    .footer-right {
-      font-family: 'Montserrat', sans-serif;
-      font-size: .65rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase;
+    .vision-body {
+      margin-top: 24px; font-size: .92rem; color: var(--muted);
+      max-width: 580px; line-height: 2;
     }
 
-    /* ===== SCROLL REVEAL ===== */
-    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .72s ease, transform .72s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-d1 { transition-delay: .07s; }
-    .reveal-d2 { transition-delay: .14s; }
-    .reveal-d3 { transition-delay: .22s; }
-    .reveal-d4 { transition-delay: .30s; }
-    .reveal-d5 { transition-delay: .38s; }
+    /* Works preview */
+    #works-preview { border-bottom: 1px solid var(--blue-line); }
+    .works-preview-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: var(--section-py) var(--pad-x);
+    }
+    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
 
-    /* ===== RESPONSIVE ===== */
     @media (max-width: 960px) {
-      .nav-links { display: none; }
-      .nav-toggle { display: flex; }
-      .about-grid { grid-template-columns: 1fr; gap: 56px; }
-      .cards-grid { grid-template-columns: repeat(2, 1fr); }
-      .card:nth-child(3n) { border-right: 1px solid var(--blue-line); }
-      .card:nth-child(2n) { border-right: none; }
       #hero { flex-direction: column; gap: 40px; min-height: unset; }
       .hero-content { flex: none; width: 100%; padding-right: 0; }
       .hero-visual { width: 100%; }
-      .side-label { display: none; }
-    }
-    @media (max-width: 600px) {
-      .cards-grid { grid-template-columns: 1fr; }
-      .card { border-right: none !important; }
-      .contact-inner { flex-direction: column; align-items: flex-start; }
-      body { border-width: 3px; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Network SVG background -->
   <svg class="network-bg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <line x1="120" y1="80"  x2="380" y2="260" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="380" y1="260" x2="680" y2="140" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="680" y1="140" x2="920" y2="340" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="920" y1="340" x2="1200" y2="180" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="200" y1="400" x2="480" y2="520" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="480" y1="520" x2="760" y2="380" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="760" y1="380" x2="1040" y2="560" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="1040" y1="560" x2="1300" y2="420" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="60"  y1="600" x2="320" y2="720" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="320" y1="720" x2="600" y2="640" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="600" y1="640" x2="880" y2="800" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="880" y1="800" x2="1160" y2="680" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="120" y1="80"  x2="200" y2="400" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="380" y1="260" x2="480" y2="520" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="680" y1="140" x2="760" y2="380" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="920" y1="340" x2="1040" y2="560" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="200" y1="400" x2="320" y2="720" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="480" y1="520" x2="600" y2="640" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="760" y1="380" x2="880" y2="800" stroke="#1A3FA8" stroke-width="0.8"/>
-    <circle cx="120" cy="80"   r="5" fill="#1A3FA8"/>
-    <circle cx="380" cy="260"  r="5" fill="#1A3FA8"/>
-    <circle cx="680" cy="140"  r="5" fill="#1A3FA8"/>
-    <circle cx="920" cy="340"  r="5" fill="#1A3FA8"/>
-    <circle cx="1200" cy="180" r="5" fill="#1A3FA8"/>
-    <circle cx="200" cy="400"  r="5" fill="#1A3FA8"/>
-    <circle cx="480" cy="520"  r="5" fill="#1A3FA8"/>
-    <circle cx="760" cy="380"  r="5" fill="#1A3FA8"/>
-    <circle cx="1040" cy="560" r="5" fill="#1A3FA8"/>
-    <circle cx="1300" cy="420" r="5" fill="#1A3FA8"/>
-    <circle cx="60"  cy="600"  r="4" fill="#1A3FA8"/>
-    <circle cx="320" cy="720"  r="4" fill="#1A3FA8"/>
-    <circle cx="600" cy="640"  r="4" fill="#1A3FA8"/>
-    <circle cx="880" cy="800"  r="4" fill="#1A3FA8"/>
-    <circle cx="1160" cy="680" r="4" fill="#1A3FA8"/>
-    <circle cx="550" cy="240"  r="8" fill="none" stroke="#1A3FA8" stroke-width="1"/>
-    <circle cx="290" cy="580"  r="8" fill="none" stroke="#1A3FA8" stroke-width="1"/>
-    <circle cx="820" cy="480"  r="8" fill="none" stroke="#1A3FA8" stroke-width="1"/>
-    <circle cx="1100" cy="300" r="8" fill="none" stroke="#1A3FA8" stroke-width="1"/>
-    <circle cx="160" cy="700"  r="6" fill="none" stroke="#1A3FA8" stroke-width="1"/>
-    <circle cx="700" cy="720"  r="6" fill="none" stroke="#1A3FA8" stroke-width="1"/>
+    <line x1="100" y1="60"  x2="360" y2="240" stroke="#1A3FA8" stroke-width="0.8"/>
+    <line x1="360" y1="240" x2="660" y2="120" stroke="#1A3FA8" stroke-width="0.8"/>
+    <line x1="660" y1="120" x2="900" y2="320" stroke="#1A3FA8" stroke-width="0.8"/>
+    <line x1="900" y1="320" x2="1180" y2="160" stroke="#1A3FA8" stroke-width="0.8"/>
+    <line x1="180" y1="380" x2="460" y2="500" stroke="#1A3FA8" stroke-width="0.8"/>
+    <line x1="460" y1="500" x2="740" y2="360" stroke="#1A3FA8" stroke-width="0.8"/>
+    <line x1="740" y1="360" x2="1020" y2="540" stroke="#1A3FA8" stroke-width="0.8"/>
+    <line x1="100" y1="60"  x2="180" y2="380" stroke="#1A3FA8" stroke-width="0.8"/>
+    <line x1="360" y1="240" x2="460" y2="500" stroke="#1A3FA8" stroke-width="0.8"/>
+    <line x1="660" y1="120" x2="740" y2="360" stroke="#1A3FA8" stroke-width="0.8"/>
+    <line x1="900" y1="320" x2="1020" y2="540" stroke="#1A3FA8" stroke-width="0.8"/>
+    <circle cx="100"  cy="60"  r="5" fill="#1A3FA8"/>
+    <circle cx="360"  cy="240" r="5" fill="#1A3FA8"/>
+    <circle cx="660"  cy="120" r="5" fill="#1A3FA8"/>
+    <circle cx="900"  cy="320" r="5" fill="#1A3FA8"/>
+    <circle cx="1180" cy="160" r="5" fill="#1A3FA8"/>
+    <circle cx="180"  cy="380" r="5" fill="#1A3FA8"/>
+    <circle cx="460"  cy="500" r="5" fill="#1A3FA8"/>
+    <circle cx="740"  cy="360" r="5" fill="#1A3FA8"/>
+    <circle cx="1020" cy="540" r="5" fill="#1A3FA8"/>
+    <circle cx="530"  cy="220" r="8" fill="none" stroke="#1A3FA8" stroke-width="1"/>
+    <circle cx="280"  cy="560" r="8" fill="none" stroke="#1A3FA8" stroke-width="1"/>
+    <circle cx="800"  cy="460" r="8" fill="none" stroke="#1A3FA8" stroke-width="1"/>
   </svg>
 
-  <!-- Side labels -->
-  <span class="side-label side-label-left">yuichiro washizaki — ai developer</span>
+  <span class="side-label side-label-left">gekko — ai developer</span>
   <span class="side-label side-label-right">claude code × ai development</span>
 
-  <!-- NAV -->
-  <nav id="nav">
-    <a href="#" class="nav-logo">YW Portfolio</a>
+  <nav>
+    <a href="index.html" class="nav-logo">gekko</a>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#works">Works</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="works.html">Works</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="メニュー">
       <span></span><span></span><span></span>
     </button>
   </nav>
   <div class="nav-mobile" id="navMobile">
-    <a href="#about" class="nav-mobile-link">About</a>
-    <a href="#works" class="nav-mobile-link">Works</a>
-    <a href="#contact" class="nav-mobile-link">Contact</a>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="works.html">Works</a>
+    <a href="contact.html">Contact</a>
   </div>
 
   <main>
 
     <!-- HERO -->
-    <section id="top">
+    <section>
       <div id="hero">
         <div class="hero-content">
           <p class="hero-eyebrow reveal">Claude Code &times; AI Development</p>
@@ -468,15 +140,15 @@
             <span class="thin">アイデアを形に。</span>
           </h1>
           <p class="hero-sub reveal reveal-d2">
-            Claude Code を使ったエージェント開発・自動化・ゲーム制作など、<br>
-            AI を活用した開発実績をまとめています。
+            AIエージェント・自動化・ゲーム開発など、<br>
+            Claude Code を使った開発実績をまとめています。
           </p>
           <div class="hero-actions reveal reveal-d3">
-            <a href="#works" class="btn btn-fill">
+            <a href="works.html" class="btn btn-fill">
               実績を見る
               <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9,3 14,8 9,13"/></svg>
             </a>
-            <a href="#contact" class="btn btn-outline">お問い合わせ</a>
+            <a href="about.html" class="btn btn-outline">About me</a>
           </div>
         </div>
         <div class="hero-visual reveal reveal-d2">
@@ -487,273 +159,104 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="section-inner left">
-        <!-- Section icon: A -->
-        <div class="section-icon" style="text-align:center;">
-          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <polyline points="4,52 28,6 52,52" stroke="#1A3FA8" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+    <!-- VISION -->
+    <section id="vision">
+      <div class="vision-inner">
+        <div class="vision-icon section-icon reveal">
+          <svg viewBox="0 0 56 56" fill="none">
+            <polyline points="4,52 28,6 52,52" stroke="#1A3FA8" stroke-width="1.8" stroke-linejoin="round"/>
             <line x1="13" y1="36" x2="43" y2="36" stroke="#1A3FA8" stroke-width="1.8"/>
           </svg>
-          <span class="section-icon-label">About</span>
+          <span class="section-icon-label">Vision</span>
           <span class="section-icon-dot"></span>
         </div>
-        <h2 class="section-title reveal">使用技術</h2>
-        <div class="section-divider"></div>
-        <div class="about-grid">
-          <div>
-            <p class="about-lead reveal">Claude Code を中心に、AI×開発の実践を積み重ねています。</p>
-            <p class="about-body reveal reveal-d1">
-              AIエージェントの設計・スキル開発・Webアプリ制作に取り組んでいます。
-              マルチエージェントによる自動化から、ゲーム開発・コンテンツ生成AIまで幅広く実装してきました。
-            </p>
-            <p class="about-body reveal reveal-d2">
-              Claude Code を活用したスキル開発を通じて、AI と人間が協働する開発スタイルを探求しています。
-            </p>
-            <div class="skill-list reveal reveal-d3">
-              <span class="skill-tag">Claude Code</span>
-              <span class="skill-tag">AI Agent</span>
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">HTML / CSS</span>
-              <span class="skill-tag">JavaScript</span>
-              <span class="skill-tag">Google Sheets API</span>
-              <span class="skill-tag">Manus</span>
-              <span class="skill-tag">Threads API</span>
-            </div>
-          </div>
-          <div class="stat-grid reveal reveal-d2">
-            <div class="stat-cell">
-              <div class="stat-num">8</div>
-              <div class="stat-label">制作実績</div>
-            </div>
-            <div class="stat-cell">
-              <div class="stat-num">3</div>
-              <div class="stat-label">AIエージェント</div>
-            </div>
-            <div class="stat-cell">
-              <div class="stat-num">2</div>
-              <div class="stat-label">ゲーム開発</div>
-            </div>
-            <div class="stat-cell">
-              <div class="stat-num">∞</div>
-              <div class="stat-label">学習継続中</div>
-            </div>
-          </div>
+        <h2 class="vision-heading reveal reveal-d1">
+          AIと人間が協働する<br>新しい開発スタイルを探求する
+        </h2>
+        <p class="vision-body reveal reveal-d2">
+          Claude Code を軸に、AIエージェントの設計から自動化・ゲーム制作まで幅広く実装してきました。
+          ツールを使うだけでなく、AIと一緒に考え・作る開発体験そのものを探求しています。
+        </p>
+        <div style="margin-top:48px;" class="reveal reveal-d3">
+          <a href="about.html" class="btn btn-outline">
+            プロフィールを見る
+            <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9,3 14,8 9,13"/></svg>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- WORKS -->
-    <section id="works">
-      <div class="section-inner">
-        <!-- Section icon: W -->
-        <div class="section-icon">
-          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <polyline points="4,8 16,48 28,24 40,48 52,8" stroke="#1A3FA8" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
-          </svg>
-          <span class="section-icon-label">Works</span>
-          <span class="section-icon-dot"></span>
-        </div>
-        <h2 class="section-title reveal">開発実績</h2>
-        <div class="section-divider"></div>
-        <div class="filter-row reveal reveal-d1">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="ai-agent">AI Agent</button>
-          <button class="filter-btn" data-filter="automation">Automation</button>
-          <button class="filter-btn" data-filter="game">Game</button>
-          <button class="filter-btn" data-filter="web">Web</button>
+    <!-- WORKS PREVIEW -->
+    <section id="works-preview">
+      <div class="works-preview-inner">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title reveal">Recent Works</h2>
+            <div class="section-divider"></div>
+          </div>
+          <a href="works.html" class="btn btn-outline reveal">
+            View All
+            <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9,3 14,8 9,13"/></svg>
+          </a>
         </div>
         <div class="cards-grid">
 
-          <div class="card reveal" data-category="ai-agent">
+          <div class="card reveal">
             <div class="card-thumb">
               <img loading="lazy" src="portforio-images/課題１.png" alt="マルチエージェント開発">
             </div>
             <div class="card-body">
-              <div class="card-tags">
-                <span class="card-tag fill">Claude Code</span>
-                <span class="card-tag">AI Agent</span>
-              </div>
+              <div class="card-tags"><span class="card-tag fill">Claude Code</span><span class="card-tag">AI Agent</span></div>
               <h3 class="card-title">マルチエージェント開発</h3>
-              <p class="card-desc">doc-writer・code-reviewer・test-runner の 3 エージェントが連携し、自動でコードを完成させるシステム。</p>
+              <p class="card-desc">3エージェントが連携し自動でコードを完成させるシステム。</p>
             </div>
           </div>
 
-          <div class="card reveal reveal-d1" data-category="automation">
-            <div class="card-thumb">
-              <img loading="lazy" src="portforio-images/課題２.png" alt="議事録生成スキル">
-            </div>
-            <div class="card-body">
-              <div class="card-tags">
-                <span class="card-tag fill">Claude Code</span>
-                <span class="card-tag">Automation</span>
-              </div>
-              <h3 class="card-title">議事録生成スキル</h3>
-              <p class="card-desc">箇条書きメモを入力するだけで、構造化された議事録を自動生成するカスタムスキル。</p>
-            </div>
-          </div>
-
-          <div class="card reveal reveal-d2" data-category="ai-agent">
+          <div class="card reveal reveal-d1">
             <div class="card-thumb">
               <img loading="lazy" src="portforio-images/課題３.png" alt="Threads投稿生成AI">
             </div>
             <div class="card-body">
-              <div class="card-tags">
-                <span class="card-tag fill">Claude Code</span>
-                <span class="card-tag">Content AI</span>
-              </div>
+              <div class="card-tags"><span class="card-tag fill">Claude Code</span><span class="card-tag">Content AI</span></div>
               <h3 class="card-title">Threads 投稿生成 AI</h3>
-              <p class="card-desc">40代女性向け美容ジャンルの Threads 投稿文を、リサーチから執筆まで自動生成する AI スキル。</p>
+              <p class="card-desc">リサーチから執筆まで自動生成するAIスキル。</p>
             </div>
           </div>
 
-          <div class="card reveal reveal-d3" data-category="automation">
-            <div class="card-thumb">
-              <img loading="lazy" src="portforio-images/News.png" alt="ニュース配信Bot">
-            </div>
-            <div class="card-body">
-              <div class="card-tags">
-                <span class="card-tag fill">Manus</span>
-                <span class="card-tag">Bot</span>
-              </div>
-              <h3 class="card-title">ニュース配信 Bot</h3>
-              <p class="card-desc">Yahoo! ニュースの最新情報を定期取得・要約し、メッセージングアプリへ自動配信する Bot。</p>
-            </div>
-          </div>
-
-          <div class="card reveal reveal-d4" data-category="automation">
-            <div class="card-thumb">
-              <img loading="lazy" src="portforio-images/課題４.png" alt="スプレッドシート×AI連携">
-            </div>
-            <div class="card-body">
-              <div class="card-tags">
-                <span class="card-tag">Sheets API</span>
-                <span class="card-tag">Data × AI</span>
-              </div>
-              <h3 class="card-title">スプレッドシート × AI 連携</h3>
-              <p class="card-desc">AI による Web リサーチ結果をスプレッドシートへ自動書き込みするデータ収集パイプライン。</p>
-            </div>
-          </div>
-
-          <div class="card reveal reveal-d5" data-category="web">
-            <div class="card-thumb">
-              <img loading="lazy" src="portforio-images/美容.png" alt="美容情報サイト">
-            </div>
-            <div class="card-body">
-              <div class="card-tags">
-                <span class="card-tag fill">Web</span>
-              </div>
-              <h3 class="card-title">美容情報サイト</h3>
-              <p class="card-desc">皮膚科学的エビデンスをベースにした美容情報サイトのランディングページ。</p>
-            </div>
-          </div>
-
-          <div class="card reveal" data-category="game">
+          <div class="card reveal reveal-d2">
             <div class="card-thumb">
               <img loading="lazy" src="portforio-images/テトリス.png" alt="改良版テトリス">
             </div>
             <div class="card-body">
-              <div class="card-tags">
-                <span class="card-tag fill">Game</span>
-                <span class="card-tag">JavaScript</span>
-              </div>
+              <div class="card-tags"><span class="card-tag fill">Game</span><span class="card-tag">JavaScript</span></div>
               <h3 class="card-title">改良版テトリス</h3>
-              <p class="card-desc">NEXT 表示・スコア機能を実装したダークテーマのブラウザ型テトリス。</p>
+              <p class="card-desc">NEXT表示・スコア機能付きブラウザ型テトリス。</p>
             </div>
           </div>
 
-          <div class="card reveal reveal-d1" data-category="game">
-            <div class="card-thumb">
-              <img loading="lazy" src="portforio-images/ぷよぷよ.png" alt="ぷよぷよ">
-            </div>
-            <div class="card-body">
-              <div class="card-tags">
-                <span class="card-tag fill">Game</span>
-                <span class="card-tag">JavaScript</span>
-              </div>
-              <h3 class="card-title">ぷよぷよ</h3>
-              <p class="card-desc">パーティクル背景が動くスタイリッシュなブラウザ型ぷよぷよゲーム。</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-      <div class="section-inner">
-        <!-- Section icon: C -->
-        <div class="section-icon">
-          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M48 18 A24 24 0 1 0 48 38" stroke="#1A3FA8" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-          </svg>
-          <span class="section-icon-label">Contact</span>
-          <span class="section-icon-dot"></span>
-        </div>
-        <h2 class="section-title reveal">お問い合わせ</h2>
-        <div class="section-divider"></div>
-        <div class="contact-inner reveal reveal-d1">
-          <div class="contact-copy">
-            <h3>一緒に何か作りませんか？</h3>
-            <p>AI を活用した開発・自動化・コンテンツ生成に興味がある方はお気軽にどうぞ。</p>
-          </div>
-          <div class="contact-actions">
-            <a href="mailto:gekkouka.0114@gmail.com" class="btn btn-fill">
-              メールを送る
-              <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9,3 14,8 9,13"/></svg>
-            </a>
-            <a href="https://github.com/youinstafukugyou-create" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
-          </div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- FOOTER -->
   <footer>
-    <span class="footer-logo">YW Portfolio</span>
-    <span class="footer-right">&copy; 2026 Yuichiro Washizaki &nbsp;·&nbsp; Built with Claude Code</span>
+    <a href="index.html" class="footer-logo">gekko</a>
+    <ul class="footer-nav">
+      <li><a href="about.html">About</a></li>
+      <li><a href="works.html">Works</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <span class="footer-copy">&copy; 2026 gekko &nbsp;·&nbsp; Built with Claude Code</span>
   </footer>
 
   <script>
-    // Mobile nav
     const toggle = document.getElementById('navToggle');
-    const mobileMenu = document.getElementById('navMobile');
-    toggle.addEventListener('click', () => {
-      const open = mobileMenu.classList.toggle('open');
-      toggle.classList.toggle('open', open);
-    });
-    document.querySelectorAll('.nav-mobile-link').forEach(a => {
-      a.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        toggle.classList.remove('open');
-      });
-    });
-
-    // Scroll reveal
-    const revealObs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
-
-    // Works filter
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.card');
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const f = btn.dataset.filter;
-        cards.forEach(card => {
-          card.style.display = (f === 'all' || card.dataset.category === f) ? '' : 'none';
-        });
-      });
-    });
+    const mobile = document.getElementById('navMobile');
+    toggle.addEventListener('click', () => { mobile.classList.toggle('open'); toggle.classList.toggle('open'); });
+    mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mobile.classList.remove('open'); toggle.classList.remove('open'); }));
+    const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   </script>
 </body>
 </html>
