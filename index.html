@@ -10,71 +10,147 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* HOME-specific */
+    /* ── HERO ── */
     #hero {
-      display: flex; align-items: center; gap: 0;
-      min-height: calc(100vh - 88px);
-      padding: clamp(48px,8vw,80px) var(--pad-x);
+      position: relative;
+      min-height: calc(100vh - var(--nav-h));
+      display: flex; align-items: center;
       border-bottom: 1px solid var(--blue-line);
-      max-width: 100%; overflow: hidden;
+      overflow: hidden;
     }
-    .hero-content { flex: 0 0 50%; padding-right: clamp(32px,5vw,72px); }
-    .hero-visual   { flex: 1; }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('Gemini_Generated_Image_6kqemx6kqemx6kqe.png') right center / contain no-repeat;
+      opacity: 0.12;
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      width: 100%; max-width: var(--max-w);
+      margin: 0 auto;
+      padding: clamp(72px,10vw,130px) var(--pad-x);
+    }
+    .hero-counter {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(5rem,14vw,13rem);
+      font-weight: 700; letter-spacing: -.06em; line-height: 1;
+      color: rgba(26,63,168,.06);
+      position: absolute; right: var(--pad-x); top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none; user-select: none;
+    }
     .hero-eyebrow {
       font-family: 'Montserrat', sans-serif;
-      font-size: .64rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase;
-      color: var(--blue); margin-bottom: 24px; opacity: .8;
+      font-size: .62rem; font-weight: 700;
+      letter-spacing: .30em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 28px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block;
+      width: 32px; height: 1px; background: var(--blue);
     }
     .hero-title {
       font-family: 'Montserrat', sans-serif;
-      font-size: clamp(3rem, 6.5vw, 5.6rem);
-      font-weight: 700; line-height: 1.06; letter-spacing: -.02em; color: var(--blue);
+      font-size: clamp(3.2rem, 7.5vw, 6.8rem);
+      font-weight: 700; line-height: 1.04;
+      letter-spacing: -.03em; color: var(--blue);
+      max-width: 720px;
     }
-    .hero-title .thin { font-weight: 300; font-style: italic; }
+    .hero-title em { font-weight: 300; font-style: italic; }
     .hero-sub {
-      margin-top: 28px; font-size: .9rem; color: var(--muted);
-      max-width: 440px; line-height: 1.9;
+      margin-top: 32px;
+      font-size: .92rem; color: var(--muted);
+      max-width: 420px; line-height: 2.1;
     }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 48px; }
-    .hero-image-wrap {
-      width: 100%; aspect-ratio: 4/3;
-      overflow: hidden; border: 1px solid var(--blue-line);
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 56px; }
+    .hero-scroll {
+      display: flex; align-items: center; gap: 12px; margin-top: 72px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: .58rem; font-weight: 700;
+      letter-spacing: .22em; text-transform: uppercase; color: var(--muted);
     }
-    .hero-image-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-scroll svg { width: 18px; height: 18px; stroke: var(--muted); fill: none; stroke-width: 1.5; animation: scrollBounce 1.6s ease-in-out infinite; }
+    @keyframes scrollBounce { 0%,100% { transform: translateY(0); } 55% { transform: translateY(6px); } }
 
-    /* Vision */
-    #vision {
+    /* ── ABOUT STRIP ── */
+    #about-strip {
       border-bottom: 1px solid var(--blue-line);
     }
-    .vision-inner {
+    .about-strip-inner {
       max-width: var(--max-w); margin: 0 auto;
       padding: var(--section-py) var(--pad-x);
-      display: flex; flex-direction: column; align-items: center; text-align: center;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
     }
-    .vision-icon { margin-bottom: 40px; }
-    .vision-heading {
+    .about-label {
       font-family: 'Montserrat', sans-serif;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 700; letter-spacing: -.02em; color: var(--blue); line-height: 1.15;
+      font-size: .6rem; font-weight: 700; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--blue); display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
     }
-    .vision-body {
-      margin-top: 24px; font-size: .92rem; color: var(--muted);
-      max-width: 580px; line-height: 2;
+    .about-label::before { content: '01'; font-size: .55rem; opacity: .4; }
+    .about-heading {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700; letter-spacing: -.02em; color: var(--blue);
+      line-height: 1.18;
     }
+    .about-body {
+      font-size: .9rem; color: var(--muted); line-height: 2.1; margin-top: 24px;
+    }
+    .about-stats {
+      display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--blue-line);
+    }
+    .about-stat {
+      padding: 36px 28px; border-right: 1px solid var(--blue-line);
+      border-bottom: 1px solid var(--blue-line); text-align: center;
+    }
+    .about-stat:nth-child(2n) { border-right: none; }
+    .about-stat:nth-child(3), .about-stat:nth-child(4) { border-bottom: none; }
+    .about-stat-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.6rem; font-weight: 700; letter-spacing: -.04em; color: var(--blue);
+    }
+    .about-stat-label { font-size: .72rem; color: var(--muted); margin-top: 6px; }
 
-    /* Works preview */
+    /* ── WORKS PREVIEW ── */
     #works-preview { border-bottom: 1px solid var(--blue-line); }
     .works-preview-inner {
       max-width: var(--max-w); margin: 0 auto;
       padding: var(--section-py) var(--pad-x);
     }
-    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
+    .section-header {
+      display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px;
+    }
+    .works-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: .6rem; font-weight: 700; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--blue); display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+    }
+    .works-label::before { content: '02'; font-size: .55rem; opacity: .4; }
+
+    /* ── CTA BAND ── */
+    #cta {
+      background: var(--blue);
+    }
+    .cta-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: clamp(64px,8vw,100px) var(--pad-x);
+      display: flex; justify-content: space-between; align-items: center; gap: 40px;
+      flex-wrap: wrap;
+    }
+    .cta-heading {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+      font-weight: 700; letter-spacing: -.02em; color: #fff;
+      line-height: 1.2;
+    }
+    .cta-sub { font-size: .88rem; color: rgba(255,255,255,.65); margin-top: 12px; }
+    .btn-white { background: #fff; color: var(--blue); border: 1px solid #fff; }
+    .btn-white:hover { background: transparent; color: #fff; }
 
     @media (max-width: 960px) {
-      #hero { flex-direction: column; gap: 40px; min-height: unset; }
-      .hero-content { flex: none; width: 100%; padding-right: 0; }
-      .hero-visual { width: 100%; }
-      .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .about-strip-inner { grid-template-columns: 1fr; gap: 48px; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .cta-inner { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
@@ -91,7 +167,6 @@
     <line x1="100" y1="60"  x2="180" y2="380" stroke="#1A3FA8" stroke-width="0.8"/>
     <line x1="360" y1="240" x2="460" y2="500" stroke="#1A3FA8" stroke-width="0.8"/>
     <line x1="660" y1="120" x2="740" y2="360" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="900" y1="320" x2="1020" y2="540" stroke="#1A3FA8" stroke-width="0.8"/>
     <circle cx="100"  cy="60"  r="5" fill="#1A3FA8"/>
     <circle cx="360"  cy="240" r="5" fill="#1A3FA8"/>
     <circle cx="660"  cy="120" r="5" fill="#1A3FA8"/>
@@ -100,9 +175,7 @@
     <circle cx="180"  cy="380" r="5" fill="#1A3FA8"/>
     <circle cx="460"  cy="500" r="5" fill="#1A3FA8"/>
     <circle cx="740"  cy="360" r="5" fill="#1A3FA8"/>
-    <circle cx="1020" cy="540" r="5" fill="#1A3FA8"/>
     <circle cx="530"  cy="220" r="8" fill="none" stroke="#1A3FA8" stroke-width="1"/>
-    <circle cx="280"  cy="560" r="8" fill="none" stroke="#1A3FA8" stroke-width="1"/>
     <circle cx="800"  cy="460" r="8" fill="none" stroke="#1A3FA8" stroke-width="1"/>
   </svg>
 
@@ -133,11 +206,13 @@
     <!-- HERO -->
     <section>
       <div id="hero">
-        <div class="hero-content">
+        <div class="hero-bg"></div>
+        <span class="hero-counter" aria-hidden="true">AI</span>
+        <div class="hero-inner">
           <p class="hero-eyebrow reveal">Claude Code &times; AI Development</p>
           <h1 class="hero-title reveal reveal-d1">
             AI で、<br>
-            <span class="thin">アイデアを形に。</span>
+            <em>アイデアを形に。</em>
           </h1>
           <p class="hero-sub reveal reveal-d2">
             AIエージェント・自動化・ゲーム開発など、<br>
@@ -150,38 +225,50 @@
             </a>
             <a href="about.html" class="btn btn-outline">About me</a>
           </div>
-        </div>
-        <div class="hero-visual reveal reveal-d2">
-          <div class="hero-image-wrap">
-            <img src="Gemini_Generated_Image_6kqemx6kqemx6kqe.png" alt="NanoBanana2 generated hero illustration">
+          <div class="hero-scroll reveal reveal-d4">
+            <span>Scroll</span>
+            <svg viewBox="0 0 16 24"><line x1="8" y1="0" x2="8" y2="20"/><polyline points="3,14 8,20 13,14"/></svg>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- VISION -->
-    <section id="vision">
-      <div class="vision-inner">
-        <div class="vision-icon section-icon reveal">
-          <svg viewBox="0 0 56 56" fill="none">
-            <polyline points="4,52 28,6 52,52" stroke="#1A3FA8" stroke-width="1.8" stroke-linejoin="round"/>
-            <line x1="13" y1="36" x2="43" y2="36" stroke="#1A3FA8" stroke-width="1.8"/>
-          </svg>
-          <span class="section-icon-label">Vision</span>
-          <span class="section-icon-dot"></span>
+    <!-- ABOUT STRIP -->
+    <section id="about-strip">
+      <div class="about-strip-inner">
+        <div>
+          <p class="about-label reveal">Vision</p>
+          <h2 class="about-heading reveal reveal-d1">
+            AIと人間が協働する<br>新しい開発スタイルを探求する
+          </h2>
+          <p class="about-body reveal reveal-d2">
+            Claude Code を軸に、AIエージェントの設計から自動化・ゲーム制作まで幅広く実装してきました。
+            ツールを使うだけでなく、AIと一緒に考え・作る開発体験そのものを探求しています。
+          </p>
+          <div style="margin-top:40px;" class="reveal reveal-d3">
+            <a href="about.html" class="btn btn-outline">
+              プロフィールを見る
+              <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9,3 14,8 9,13"/></svg>
+            </a>
+          </div>
         </div>
-        <h2 class="vision-heading reveal reveal-d1">
-          AIと人間が協働する<br>新しい開発スタイルを探求する
-        </h2>
-        <p class="vision-body reveal reveal-d2">
-          Claude Code を軸に、AIエージェントの設計から自動化・ゲーム制作まで幅広く実装してきました。
-          ツールを使うだけでなく、AIと一緒に考え・作る開発体験そのものを探求しています。
-        </p>
-        <div style="margin-top:48px;" class="reveal reveal-d3">
-          <a href="about.html" class="btn btn-outline">
-            プロフィールを見る
-            <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9,3 14,8 9,13"/></svg>
-          </a>
+        <div class="about-stats reveal reveal-d1">
+          <div class="about-stat">
+            <div class="about-stat-num">8</div>
+            <div class="about-stat-label">制作実績</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">3</div>
+            <div class="about-stat-label">AIエージェント</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">2</div>
+            <div class="about-stat-label">ゲーム開発</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num">∞</div>
+            <div class="about-stat-label">学習継続中</div>
+          </div>
         </div>
       </div>
     </section>
@@ -191,7 +278,8 @@
       <div class="works-preview-inner">
         <div class="section-header">
           <div>
-            <h2 class="section-title reveal">Recent Works</h2>
+            <p class="works-label reveal">Recent Works</p>
+            <h2 class="section-title reveal reveal-d1">開発実績</h2>
             <div class="section-divider"></div>
           </div>
           <a href="works.html" class="btn btn-outline reveal">
@@ -199,8 +287,8 @@
             <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9,3 14,8 9,13"/></svg>
           </a>
         </div>
-        <div class="cards-grid">
 
+        <div class="cards-grid">
           <div class="card reveal">
             <div class="card-thumb">
               <img loading="lazy" src="portforio-images/課題１.png" alt="マルチエージェント開発">
@@ -233,7 +321,22 @@
               <p class="card-desc">NEXT表示・スコア機能付きブラウザ型テトリス。</p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- CTA BAND -->
+    <section id="cta">
+      <div class="cta-inner">
+        <div class="reveal">
+          <h2 class="cta-heading">お仕事のご依頼・<br>ご相談はお気軽に。</h2>
+          <p class="cta-sub">AIエージェント開発・自動化・Web制作など幅広く対応しています。</p>
+        </div>
+        <div class="reveal reveal-d1">
+          <a href="contact.html" class="btn btn-white">
+            Contact
+            <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9,3 14,8 9,13"/></svg>
+          </a>
         </div>
       </div>
     </section>
