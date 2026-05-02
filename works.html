@@ -45,7 +45,7 @@
     <div class="page-header">
       <div class="section-icon reveal">
         <svg viewBox="0 0 56 56" fill="none">
-          <polyline points="4,8 16,48 28,24 40,48 52,8" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+          <polyline points="4,8 16,48 28,24 40,48 52,8" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
         </svg>
         <span class="section-icon-label">Works</span>
         <span class="section-icon-dot"></span>
@@ -56,11 +56,11 @@
 
     <div class="works-inner">
       <div class="filter-row reveal">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="ai-agent">AI Agent</button>
-        <button class="filter-btn" data-filter="automation">Automation</button>
-        <button class="filter-btn" data-filter="game">Game</button>
-        <button class="filter-btn" data-filter="web">Web</button>
+        <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter-btn" data-filter="ai-agent" aria-pressed="false">AI Agent</button>
+        <button class="filter-btn" data-filter="automation" aria-pressed="false">Automation</button>
+        <button class="filter-btn" data-filter="game" aria-pressed="false">Game</button>
+        <button class="filter-btn" data-filter="web" aria-pressed="false">Web</button>
       </div>
 
       <div class="cards-grid" id="cardsGrid">
@@ -207,8 +207,9 @@
     const cards = document.querySelectorAll('#cardsGrid .card');
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
+        filterBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
         btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
         const f = btn.dataset.filter;
         cards.forEach(card => {
           card.classList.toggle('hidden', f !== 'all' && card.dataset.category !== f);

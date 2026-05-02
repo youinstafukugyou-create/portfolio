@@ -96,8 +96,8 @@
     <div class="page-header">
       <div class="section-icon reveal">
         <svg viewBox="0 0 56 56" fill="none">
-          <rect x="4" y="10" width="48" height="36" rx="1" stroke="#111111" stroke-width="1.8"/>
-          <polyline points="4,10 28,32 52,10" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+          <rect x="4" y="10" width="48" height="36" rx="1" stroke="currentColor" stroke-width="1.8"/>
+          <polyline points="4,10 28,32 52,10" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
         </svg>
         <span class="section-icon-label">Contact</span>
         <span class="section-icon-dot"></span>
@@ -147,13 +147,12 @@
         </div>
       </div>
 
-      <!-- FormSubmit: フォーム内容をメール送信。action の YOUR_EMAIL を実際のアドレスに変更すること -->
       <form class="contact-form reveal reveal-d1"
             action="https://formsubmit.co/hello@gekko.dev"
             method="POST">
         <input type="hidden" name="_subject" value="[Portfolio] お問い合わせ">
         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="thanks.html">
+        <input type="hidden" name="_next" value="https://youinstafukugyou-create.github.io/portfolio/thanks.html">
         <div class="form-group">
           <label class="form-label" for="name">Name</label>
           <input class="form-input" type="text" id="name" name="name" placeholder="Your name" required>
