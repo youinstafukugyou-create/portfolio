@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact | gekko</title>
+  <meta name="description" content="gekko へのお仕事依頼・コラボレーション・ご相談はこちらから。AIエージェント開発・自動化・Web制作など対応。">
+  <meta property="og:title" content="Contact | gekko AI Developer">
+  <meta property="og:description" content="AIエージェント開発・自動化・Web制作などのご依頼はお気軽にどうぞ。">
+  <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
@@ -14,7 +18,7 @@
       padding: var(--section-py) var(--pad-x);
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 80px; align-items: start;
-      border-bottom: 1px solid var(--blue-line);
+      border-bottom: 1px solid var(--border);
     }
     .contact-info { display: flex; flex-direction: column; gap: 40px; }
     .contact-lead {
@@ -23,26 +27,24 @@
     .contact-items { display: flex; flex-direction: column; gap: 0; }
     .contact-item {
       display: flex; align-items: center; gap: 20px;
-      padding: 20px 0; border-bottom: 1px solid var(--blue-line);
+      padding: 20px 0; border-bottom: 1px solid var(--border);
     }
-    .contact-item:first-child { border-top: 1px solid var(--blue-line); }
+    .contact-item:first-child { border-top: 1px solid var(--border); }
     .contact-item-icon {
       width: 40px; height: 40px; flex-shrink: 0;
-      border: 1px solid var(--blue-line);
+      border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center;
     }
-    .contact-item-icon svg { width: 18px; height: 18px; stroke: var(--blue); fill: none; stroke-width: 1.5; }
+    .contact-item-icon svg { width: 18px; height: 18px; stroke: var(--text); fill: none; stroke-width: 1.5; }
     .contact-item-body { display: flex; flex-direction: column; gap: 2px; }
     .contact-item-label {
       font-family: 'Montserrat', sans-serif;
       font-size: .58rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
-      color: var(--blue);
+      color: var(--text);
     }
-    .contact-item-value {
-      font-size: .84rem; color: var(--muted);
-    }
-    .contact-item-value a { color: var(--blue); text-decoration: none; transition: opacity .2s; }
-    .contact-item-value a:hover { opacity: .7; }
+    .contact-item-value { font-size: .84rem; color: var(--muted); }
+    .contact-item-value a { color: var(--text); text-decoration: none; transition: color .2s; }
+    .contact-item-value a:hover { color: var(--accent); }
 
     /* Form */
     .contact-form { display: flex; flex-direction: column; gap: 0; }
@@ -50,20 +52,18 @@
     .form-label {
       font-family: 'Montserrat', sans-serif;
       font-size: .6rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
-      color: var(--blue);
+      color: var(--text);
     }
     .form-input, .form-textarea {
       width: 100%; padding: 13px 16px;
-      background: transparent; border: 1px solid var(--blue-line);
+      background: transparent; border: 1px solid var(--border);
       font-family: 'Noto Sans JP', sans-serif; font-size: .84rem; color: var(--text);
-      outline: none; transition: border-color .2s;
+      outline: none; transition: border-color .2s; border-radius: 2px;
       resize: none;
     }
-    .form-input:focus, .form-textarea:focus { border-color: var(--blue); }
+    .form-input:focus, .form-textarea:focus { border-color: var(--text); }
     .form-textarea { min-height: 140px; }
-    .form-submit {
-      margin-top: 8px; align-self: flex-start;
-    }
+    .form-submit { margin-top: 8px; align-self: flex-start; }
 
     @media (max-width: 960px) {
       .contact-inner { grid-template-columns: 1fr; gap: 48px; }
@@ -71,24 +71,6 @@
   </style>
 </head>
 <body>
-
-  <svg class="network-bg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <line x1="100" y1="60"  x2="360" y2="240" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="360" y1="240" x2="660" y2="120" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="660" y1="120" x2="900" y2="320" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="180" y1="380" x2="460" y2="500" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="460" y1="500" x2="740" y2="360" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="100" y1="60"  x2="180" y2="380" stroke="#1A3FA8" stroke-width="0.8"/>
-    <circle cx="100" cy="60"  r="5" fill="#1A3FA8"/>
-    <circle cx="360" cy="240" r="5" fill="#1A3FA8"/>
-    <circle cx="660" cy="120" r="5" fill="#1A3FA8"/>
-    <circle cx="900" cy="320" r="5" fill="#1A3FA8"/>
-    <circle cx="530" cy="220" r="8" fill="none" stroke="#1A3FA8" stroke-width="1"/>
-    <circle cx="800" cy="460" r="8" fill="none" stroke="#1A3FA8" stroke-width="1"/>
-  </svg>
-
-  <span class="side-label side-label-left">gekko — ai developer</span>
-  <span class="side-label side-label-right">claude code × ai development</span>
 
   <nav>
     <a href="index.html" class="nav-logo">gekko</a>
@@ -114,8 +96,8 @@
     <div class="page-header">
       <div class="section-icon reveal">
         <svg viewBox="0 0 56 56" fill="none">
-          <rect x="4" y="10" width="48" height="36" rx="1" stroke="#1A3FA8" stroke-width="1.8"/>
-          <polyline points="4,10 28,32 52,10" stroke="#1A3FA8" stroke-width="1.8" stroke-linejoin="round"/>
+          <rect x="4" y="10" width="48" height="36" rx="1" stroke="#111111" stroke-width="1.8"/>
+          <polyline points="4,10 28,32 52,10" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
         </svg>
         <span class="section-icon-label">Contact</span>
         <span class="section-icon-dot"></span>
@@ -165,30 +147,36 @@
         </div>
       </div>
 
-      <div class="contact-form reveal reveal-d1">
+      <!-- FormSubmit: フォーム内容をメール送信。action の YOUR_EMAIL を実際のアドレスに変更すること -->
+      <form class="contact-form reveal reveal-d1"
+            action="https://formsubmit.co/hello@gekko.dev"
+            method="POST">
+        <input type="hidden" name="_subject" value="[Portfolio] お問い合わせ">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="thanks.html">
         <div class="form-group">
           <label class="form-label" for="name">Name</label>
-          <input class="form-input" type="text" id="name" placeholder="Your name">
+          <input class="form-input" type="text" id="name" name="name" placeholder="Your name" required>
         </div>
         <div class="form-group">
           <label class="form-label" for="email">Email</label>
-          <input class="form-input" type="email" id="email" placeholder="your@email.com">
+          <input class="form-input" type="email" id="email" name="email" placeholder="your@email.com" required>
         </div>
         <div class="form-group">
           <label class="form-label" for="subject">Subject</label>
-          <input class="form-input" type="text" id="subject" placeholder="お問い合わせの件名">
+          <input class="form-input" type="text" id="subject" name="subject" placeholder="お問い合わせの件名">
         </div>
         <div class="form-group">
           <label class="form-label" for="message">Message</label>
-          <textarea class="form-textarea" id="message" placeholder="メッセージをご記入ください"></textarea>
+          <textarea class="form-textarea" id="message" name="message" placeholder="メッセージをご記入ください" required></textarea>
         </div>
         <div class="form-submit">
-          <a href="mailto:hello@gekko.dev" class="btn btn-fill">
-            メールを送る
+          <button type="submit" class="btn btn-fill">
+            送信する
             <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9,3 14,8 9,13"/></svg>
-          </a>
+          </button>
         </div>
-      </div>
+      </form>
     </div>
 
   </main>

@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>gekko | AI Developer Portfolio</title>
   <meta name="description" content="Claude Code を使ったAIエージェント開発・自動化・ゲーム制作の実績をまとめたポートフォリオ。">
+  <meta property="og:title" content="gekko | AI Developer Portfolio">
+  <meta property="og:description" content="Claude Code を使ったAI開発・自動化・ゲーム制作の実績ポートフォリオ。">
+  <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
@@ -12,51 +15,34 @@
   <style>
     /* ── HERO ── */
     #hero {
-      position: relative;
       min-height: calc(100vh - var(--nav-h));
       display: flex; align-items: center;
-      border-bottom: 1px solid var(--blue-line);
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background: url('Gemini_Generated_Image_6kqemx6kqemx6kqe.png') right center / contain no-repeat;
-      opacity: 0.12;
+      border-bottom: 1px solid var(--border);
     }
     .hero-inner {
-      position: relative; z-index: 1;
       width: 100%; max-width: var(--max-w);
       margin: 0 auto;
       padding: clamp(72px,10vw,130px) var(--pad-x);
-    }
-    .hero-counter {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(5rem,14vw,13rem);
-      font-weight: 700; letter-spacing: -.06em; line-height: 1;
-      color: rgba(26,63,168,.06);
-      position: absolute; right: var(--pad-x); top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none; user-select: none;
     }
     .hero-eyebrow {
       font-family: 'Montserrat', sans-serif;
       font-size: .62rem; font-weight: 700;
       letter-spacing: .30em; text-transform: uppercase;
-      color: var(--blue); margin-bottom: 28px;
+      color: var(--muted); margin-bottom: 28px;
       display: flex; align-items: center; gap: 12px;
     }
     .hero-eyebrow::before {
       content: ''; display: block;
-      width: 32px; height: 1px; background: var(--blue);
+      width: 32px; height: 1px; background: var(--muted);
     }
     .hero-title {
       font-family: 'Montserrat', sans-serif;
       font-size: clamp(3.2rem, 7.5vw, 6.8rem);
       font-weight: 700; line-height: 1.04;
-      letter-spacing: -.03em; color: var(--blue);
+      letter-spacing: -.03em; color: var(--text);
       max-width: 720px;
     }
-    .hero-title em { font-weight: 300; font-style: italic; }
+    .hero-title em { font-weight: 300; font-style: italic; color: var(--muted); }
     .hero-sub {
       margin-top: 32px;
       font-size: .92rem; color: var(--muted);
@@ -73,9 +59,7 @@
     @keyframes scrollBounce { 0%,100% { transform: translateY(0); } 55% { transform: translateY(6px); } }
 
     /* ── ABOUT STRIP ── */
-    #about-strip {
-      border-bottom: 1px solid var(--blue-line);
-    }
+    #about-strip { border-bottom: 1px solid var(--border); }
     .about-strip-inner {
       max-width: var(--max-w); margin: 0 auto;
       padding: var(--section-py) var(--pad-x);
@@ -84,35 +68,34 @@
     .about-label {
       font-family: 'Montserrat', sans-serif;
       font-size: .6rem; font-weight: 700; letter-spacing: .28em; text-transform: uppercase;
-      color: var(--blue); display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+      color: var(--muted); display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
     }
     .about-label::before { content: '01'; font-size: .55rem; opacity: .4; }
     .about-heading {
       font-family: 'Montserrat', sans-serif;
       font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      font-weight: 700; letter-spacing: -.02em; color: var(--blue);
+      font-weight: 700; letter-spacing: -.02em; color: var(--text);
       line-height: 1.18;
     }
     .about-body {
       font-size: .9rem; color: var(--muted); line-height: 2.1; margin-top: 24px;
     }
     .about-stats {
-      display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--blue-line);
+      display: grid; grid-template-columns: 1fr 1fr;
+      background: var(--border); gap: 1px;
+      border: 1px solid var(--border);
     }
     .about-stat {
-      padding: 36px 28px; border-right: 1px solid var(--blue-line);
-      border-bottom: 1px solid var(--blue-line); text-align: center;
+      padding: 36px 28px; background: var(--bg); text-align: center;
     }
-    .about-stat:nth-child(2n) { border-right: none; }
-    .about-stat:nth-child(3), .about-stat:nth-child(4) { border-bottom: none; }
     .about-stat-num {
       font-family: 'Montserrat', sans-serif;
-      font-size: 2.6rem; font-weight: 700; letter-spacing: -.04em; color: var(--blue);
+      font-size: 2.6rem; font-weight: 700; letter-spacing: -.04em; color: var(--text);
     }
     .about-stat-label { font-size: .72rem; color: var(--muted); margin-top: 6px; }
 
     /* ── WORKS PREVIEW ── */
-    #works-preview { border-bottom: 1px solid var(--blue-line); }
+    #works-preview { border-bottom: 1px solid var(--border); }
     .works-preview-inner {
       max-width: var(--max-w); margin: 0 auto;
       padding: var(--section-py) var(--pad-x);
@@ -123,14 +106,12 @@
     .works-label {
       font-family: 'Montserrat', sans-serif;
       font-size: .6rem; font-weight: 700; letter-spacing: .28em; text-transform: uppercase;
-      color: var(--blue); display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+      color: var(--muted); display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
     }
     .works-label::before { content: '02'; font-size: .55rem; opacity: .4; }
 
     /* ── CTA BAND ── */
-    #cta {
-      background: var(--blue);
-    }
+    #cta { background: var(--text); }
     .cta-inner {
       max-width: var(--max-w); margin: 0 auto;
       padding: clamp(64px,8vw,100px) var(--pad-x);
@@ -143,9 +124,7 @@
       font-weight: 700; letter-spacing: -.02em; color: #fff;
       line-height: 1.2;
     }
-    .cta-sub { font-size: .88rem; color: rgba(255,255,255,.65); margin-top: 12px; }
-    .btn-white { background: #fff; color: var(--blue); border: 1px solid #fff; }
-    .btn-white:hover { background: transparent; color: #fff; }
+    .cta-sub { font-size: .88rem; color: rgba(255,255,255,.55); margin-top: 12px; }
 
     @media (max-width: 960px) {
       .about-strip-inner { grid-template-columns: 1fr; gap: 48px; }
@@ -155,32 +134,6 @@
   </style>
 </head>
 <body>
-
-  <svg class="network-bg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <line x1="100" y1="60"  x2="360" y2="240" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="360" y1="240" x2="660" y2="120" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="660" y1="120" x2="900" y2="320" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="900" y1="320" x2="1180" y2="160" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="180" y1="380" x2="460" y2="500" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="460" y1="500" x2="740" y2="360" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="740" y1="360" x2="1020" y2="540" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="100" y1="60"  x2="180" y2="380" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="360" y1="240" x2="460" y2="500" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="660" y1="120" x2="740" y2="360" stroke="#1A3FA8" stroke-width="0.8"/>
-    <circle cx="100"  cy="60"  r="5" fill="#1A3FA8"/>
-    <circle cx="360"  cy="240" r="5" fill="#1A3FA8"/>
-    <circle cx="660"  cy="120" r="5" fill="#1A3FA8"/>
-    <circle cx="900"  cy="320" r="5" fill="#1A3FA8"/>
-    <circle cx="1180" cy="160" r="5" fill="#1A3FA8"/>
-    <circle cx="180"  cy="380" r="5" fill="#1A3FA8"/>
-    <circle cx="460"  cy="500" r="5" fill="#1A3FA8"/>
-    <circle cx="740"  cy="360" r="5" fill="#1A3FA8"/>
-    <circle cx="530"  cy="220" r="8" fill="none" stroke="#1A3FA8" stroke-width="1"/>
-    <circle cx="800"  cy="460" r="8" fill="none" stroke="#1A3FA8" stroke-width="1"/>
-  </svg>
-
-  <span class="side-label side-label-left">gekko — ai developer</span>
-  <span class="side-label side-label-right">claude code × ai development</span>
 
   <nav>
     <a href="index.html" class="nav-logo">gekko</a>
@@ -204,31 +157,27 @@
   <main>
 
     <!-- HERO -->
-    <section>
-      <div id="hero">
-        <div class="hero-bg"></div>
-        <span class="hero-counter" aria-hidden="true">AI</span>
-        <div class="hero-inner">
-          <p class="hero-eyebrow reveal">Claude Code &times; AI Development</p>
-          <h1 class="hero-title reveal reveal-d1">
-            AI で、<br>
-            <em>アイデアを形に。</em>
-          </h1>
-          <p class="hero-sub reveal reveal-d2">
-            AIエージェント・自動化・ゲーム開発など、<br>
-            Claude Code を使った開発実績をまとめています。
-          </p>
-          <div class="hero-actions reveal reveal-d3">
-            <a href="works.html" class="btn btn-fill">
-              実績を見る
-              <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9,3 14,8 9,13"/></svg>
-            </a>
-            <a href="about.html" class="btn btn-outline">About me</a>
-          </div>
-          <div class="hero-scroll reveal reveal-d4">
-            <span>Scroll</span>
-            <svg viewBox="0 0 16 24"><line x1="8" y1="0" x2="8" y2="20"/><polyline points="3,14 8,20 13,14"/></svg>
-          </div>
+    <section id="hero">
+      <div class="hero-inner">
+        <p class="hero-eyebrow reveal">Claude Code &times; AI Development</p>
+        <h1 class="hero-title reveal reveal-d1">
+          AI で、<br>
+          <em>アイデアを形に。</em>
+        </h1>
+        <p class="hero-sub reveal reveal-d2">
+          AIエージェント・自動化・ゲーム開発など、<br>
+          Claude Code を使った開発実績をまとめています。
+        </p>
+        <div class="hero-actions reveal reveal-d3">
+          <a href="works.html" class="btn btn-fill">
+            実績を見る
+            <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9,3 14,8 9,13"/></svg>
+          </a>
+          <a href="about.html" class="btn btn-outline">About me</a>
+        </div>
+        <div class="hero-scroll reveal reveal-d4">
+          <span>Scroll</span>
+          <svg viewBox="0 0 16 24"><line x1="8" y1="0" x2="8" y2="20"/><polyline points="3,14 8,20 13,14"/></svg>
         </div>
       </div>
     </section>
@@ -254,7 +203,7 @@
         </div>
         <div class="about-stats reveal reveal-d1">
           <div class="about-stat">
-            <div class="about-stat-num">8</div>
+            <div class="about-stat-num">10</div>
             <div class="about-stat-label">制作実績</div>
           </div>
           <div class="about-stat">
@@ -291,7 +240,7 @@
         <div class="cards-grid">
           <div class="card reveal">
             <div class="card-thumb">
-              <img loading="lazy" src="portforio-images/課題１.png" alt="マルチエージェント開発">
+              <img loading="lazy" src="portforio-images/kadai1.png" alt="マルチエージェント開発">
             </div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag fill">Claude Code</span><span class="card-tag">AI Agent</span></div>
@@ -302,7 +251,7 @@
 
           <div class="card reveal reveal-d1">
             <div class="card-thumb">
-              <img loading="lazy" src="portforio-images/課題３.png" alt="Threads投稿生成AI">
+              <img loading="lazy" src="portforio-images/kadai3.png" alt="Threads投稿生成AI">
             </div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag fill">Claude Code</span><span class="card-tag">Content AI</span></div>
@@ -313,7 +262,7 @@
 
           <div class="card reveal reveal-d2">
             <div class="card-thumb">
-              <img loading="lazy" src="portforio-images/テトリス.png" alt="改良版テトリス">
+              <img loading="lazy" src="portforio-images/tetris.png" alt="改良版テトリス">
             </div>
             <div class="card-body">
               <div class="card-tags"><span class="card-tag fill">Game</span><span class="card-tag">JavaScript</span></div>
@@ -333,7 +282,7 @@
           <p class="cta-sub">AIエージェント開発・自動化・Web制作など幅広く対応しています。</p>
         </div>
         <div class="reveal reveal-d1">
-          <a href="contact.html" class="btn btn-white">
+          <a href="contact.html" class="btn btn-inv">
             Contact
             <svg viewBox="0 0 16 16"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9,3 14,8 9,13"/></svg>
           </a>
