@@ -196,7 +196,11 @@
     toggle.addEventListener('click', () => { mobile.classList.toggle('open'); toggle.classList.toggle('open'); });
     mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mobile.classList.remove('open'); toggle.classList.remove('open'); }));
     const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.08 });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) { el.classList.add('visible'); }
+      else { obs.observe(el); }
+    });
 
     /* Filter: use .hidden class so gap-based grid stays consistent */
     const filterBtns = document.querySelectorAll('.filter-btn');
