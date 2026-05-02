@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Works | gekko</title>
+  <meta name="description" content="gekko の開発実績一覧。Claude Code を使ったAI開発・自動化・ゲーム制作10件を掲載。">
+  <meta property="og:title" content="Works | gekko AI Developer Portfolio">
+  <meta property="og:description" content="Claude Code を使ったAI開発・自動化・ゲーム制作の実績一覧。">
+  <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
@@ -16,23 +20,6 @@
   </style>
 </head>
 <body>
-
-  <svg class="network-bg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <line x1="100" y1="60"  x2="360" y2="240" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="360" y1="240" x2="660" y2="120" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="660" y1="120" x2="900" y2="320" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="180" y1="380" x2="460" y2="500" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="460" y1="500" x2="740" y2="360" stroke="#1A3FA8" stroke-width="0.8"/>
-    <line x1="100" y1="60"  x2="180" y2="380" stroke="#1A3FA8" stroke-width="0.8"/>
-    <circle cx="100" cy="60"  r="5" fill="#1A3FA8"/>
-    <circle cx="360" cy="240" r="5" fill="#1A3FA8"/>
-    <circle cx="660" cy="120" r="5" fill="#1A3FA8"/>
-    <circle cx="900" cy="320" r="5" fill="#1A3FA8"/>
-    <circle cx="530" cy="220" r="8" fill="none" stroke="#1A3FA8" stroke-width="1"/>
-  </svg>
-
-  <span class="side-label side-label-left">gekko — ai developer</span>
-  <span class="side-label side-label-right">claude code × ai development</span>
 
   <nav>
     <a href="index.html" class="nav-logo">gekko</a>
@@ -58,7 +45,7 @@
     <div class="page-header">
       <div class="section-icon reveal">
         <svg viewBox="0 0 56 56" fill="none">
-          <polyline points="4,8 16,48 28,24 40,48 52,8" stroke="#1A3FA8" stroke-width="1.8" stroke-linejoin="round"/>
+          <polyline points="4,8 16,48 28,24 40,48 52,8" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
         </svg>
         <span class="section-icon-label">Works</span>
         <span class="section-icon-dot"></span>
@@ -76,11 +63,11 @@
         <button class="filter-btn" data-filter="web">Web</button>
       </div>
 
-      <div class="cards-grid">
+      <div class="cards-grid" id="cardsGrid">
 
         <div class="card reveal" data-category="ai-agent">
           <div class="card-thumb">
-            <img loading="lazy" src="portforio-images/課題１.png" alt="マルチエージェント開発">
+            <img loading="lazy" src="portforio-images/kadai1.png" alt="マルチエージェント開発">
           </div>
           <div class="card-body">
             <div class="card-tags"><span class="card-tag fill">Claude Code</span><span class="card-tag">AI Agent</span></div>
@@ -91,7 +78,7 @@
 
         <div class="card reveal reveal-d1" data-category="automation">
           <div class="card-thumb">
-            <img loading="lazy" src="portforio-images/課題２.png" alt="議事録生成スキル">
+            <img loading="lazy" src="portforio-images/kadai2.png" alt="議事録生成スキル">
           </div>
           <div class="card-body">
             <div class="card-tags"><span class="card-tag fill">Claude Code</span><span class="card-tag">Automation</span></div>
@@ -102,7 +89,7 @@
 
         <div class="card reveal reveal-d2" data-category="ai-agent">
           <div class="card-thumb">
-            <img loading="lazy" src="portforio-images/課題３.png" alt="Threads投稿生成AI">
+            <img loading="lazy" src="portforio-images/kadai3.png" alt="Threads投稿生成AI — メイン画面">
           </div>
           <div class="card-body">
             <div class="card-tags"><span class="card-tag fill">Claude Code</span><span class="card-tag">Content AI</span></div>
@@ -111,9 +98,31 @@
           </div>
         </div>
 
-        <div class="card reveal reveal-d3" data-category="automation">
+        <div class="card reveal" data-category="ai-agent">
           <div class="card-thumb">
-            <img loading="lazy" src="portforio-images/News.png" alt="ニュース配信Bot">
+            <img loading="lazy" src="portforio-images/kadai3-2.png" alt="Threads投稿生成AI — 悩みリサーチ出力">
+          </div>
+          <div class="card-body">
+            <div class="card-tags"><span class="card-tag fill">Claude Code</span><span class="card-tag">Content AI</span></div>
+            <h3 class="card-title">Threads AI — リサーチ出力</h3>
+            <p class="card-desc">ターゲット層の悩みを自動リサーチし、投稿テーマを候補として生成するサブエージェントの出力例。</p>
+          </div>
+        </div>
+
+        <div class="card reveal reveal-d1" data-category="ai-agent">
+          <div class="card-thumb">
+            <img loading="lazy" src="portforio-images/kadai3-3.png" alt="Threads投稿生成AI — 投稿文出力">
+          </div>
+          <div class="card-body">
+            <div class="card-tags"><span class="card-tag fill">Claude Code</span><span class="card-tag">Content AI</span></div>
+            <h3 class="card-title">Threads AI — 投稿文出力</h3>
+            <p class="card-desc">リサーチ結果をもとに、エンゲージメントを意識した Threads 投稿文を自動生成する最終出力の例。</p>
+          </div>
+        </div>
+
+        <div class="card reveal reveal-d2" data-category="automation">
+          <div class="card-thumb">
+            <img loading="lazy" src="portforio-images/news.png" alt="ニュース配信Bot">
           </div>
           <div class="card-body">
             <div class="card-tags"><span class="card-tag fill">Manus</span><span class="card-tag">Bot</span></div>
@@ -122,9 +131,9 @@
           </div>
         </div>
 
-        <div class="card reveal reveal-d4" data-category="automation">
+        <div class="card reveal" data-category="automation">
           <div class="card-thumb">
-            <img loading="lazy" src="portforio-images/課題４.png" alt="スプレッドシート×AI連携">
+            <img loading="lazy" src="portforio-images/kadai4.png" alt="スプレッドシート×AI連携">
           </div>
           <div class="card-body">
             <div class="card-tags"><span class="card-tag">Sheets API</span><span class="card-tag">Data × AI</span></div>
@@ -133,9 +142,9 @@
           </div>
         </div>
 
-        <div class="card reveal reveal-d5" data-category="web">
+        <div class="card reveal reveal-d1" data-category="web">
           <div class="card-thumb">
-            <img loading="lazy" src="portforio-images/美容.png" alt="美容情報サイト">
+            <img loading="lazy" src="portforio-images/beauty.png" alt="美容情報サイト">
           </div>
           <div class="card-body">
             <div class="card-tags"><span class="card-tag fill">Web</span></div>
@@ -144,9 +153,9 @@
           </div>
         </div>
 
-        <div class="card reveal" data-category="game">
+        <div class="card reveal reveal-d2" data-category="game">
           <div class="card-thumb">
-            <img loading="lazy" src="portforio-images/テトリス.png" alt="改良版テトリス">
+            <img loading="lazy" src="portforio-images/tetris.png" alt="改良版テトリス">
           </div>
           <div class="card-body">
             <div class="card-tags"><span class="card-tag fill">Game</span><span class="card-tag">JavaScript</span></div>
@@ -155,9 +164,9 @@
           </div>
         </div>
 
-        <div class="card reveal reveal-d1" data-category="game">
+        <div class="card reveal" data-category="game">
           <div class="card-thumb">
-            <img loading="lazy" src="portforio-images/ぷよぷよ.png" alt="ぷよぷよ">
+            <img loading="lazy" src="portforio-images/puyopuyo.png" alt="ぷよぷよ">
           </div>
           <div class="card-body">
             <div class="card-tags"><span class="card-tag fill">Game</span><span class="card-tag">JavaScript</span></div>
@@ -188,14 +197,18 @@
     mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mobile.classList.remove('open'); toggle.classList.remove('open'); }));
     const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    /* Filter: use .hidden class so gap-based grid stays consistent */
     const filterBtns = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.card');
+    const cards = document.querySelectorAll('#cardsGrid .card');
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const f = btn.dataset.filter;
-        cards.forEach(card => { card.style.display = (f === 'all' || card.dataset.category === f) ? '' : 'none'; });
+        cards.forEach(card => {
+          card.classList.toggle('hidden', f !== 'all' && card.dataset.category !== f);
+        });
       });
     });
   </script>
