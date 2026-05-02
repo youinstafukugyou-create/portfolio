@@ -1,0 +1,37 @@
+theme_design_prompt:
+  core_concept:
+    - "Minimal & Structural (無駄を省き、構造の美しさで魅せる)"
+    - "Typography-driven (文字そのものをデザインの一部として扱う)"
+    - "Sophisticated Negative Space (計算された余白によるストーリーテリング)"
+  atmosphere:
+    - "Professional (洗練・専門性)"
+    - "Clean & Transparent (清潔感・透明感)"
+    - "Modern & Timeless (現代的かつ流行に左右されない)"
+  color_palette:
+    light_mode:
+      background: "#FFFFFF" # 徹底した余白の美しさを際立たせる純白
+      surface: "#F7F7F7" # セクションを区切るためのごく淡いグレー
+      text_primary: "#111111" # 視認性と引き締まりを持たせる墨黒
+      text_secondary: "#666666" # 情報の階層を作るためのミディアムグレー
+      border: "#EAEAEA" # 構造を定義する主張の少ない極細ライン
+    dark_mode_suggestion: # 提案：汎用性を高めるためのダークテーマ定義
+      background: "#0A0A0A"
+      surface: "#1A1A1A"
+      text_primary: "#F5F5F5"
+      text_secondary: "#A0A0A0"
+      border: "#333333"
+    accent_rule: 
+      - "基本はモノトーンで構成し、ブランドカラー1色のみをリンクやボタンのホバー時に限定して使用する"
+  typography:
+    font_family:
+      heading: "モダンで幾何学的なサンセリフ体（例: Montserrat, Futura, 游ゴシック）"
+      body: "可読性の高いニュートラルなサンセリフ体（例: Helvetica Neue, Noto Sans JP）"
+    rules:
+      - "見出しと本文のジャンプ率（サイズ差）を極端に大きく取り、画面にメリハリをつける"
+      - "行間（line-height）を通常より広めに確保し、情報の息苦しさを排除する"
+      - "レター間隔（letter-spacing）を微調整し、見出しにエレガントさを持たせる"
+  ui_characteristics:
+    spacing: "マクロホワイトスペース（要素間の大きな余白）を大胆に使用し、ユーザーの視線を誘導する"
+    shapes: "装飾を排した直線的なエッジ、または極めて控えめな角丸（radius: 2px〜4px）"
+    interaction: "フェードインやホバー時の微細な透明度変化など、物理法則に基づいた控えめで滑らかなアニメーション"
+    depth: "ドロップシャドウは原則使用せず、ボーダーと余白のみで階層（奥行き）を表現する"
